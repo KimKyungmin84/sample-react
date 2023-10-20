@@ -1,0 +1,303 @@
+/** Modal **/
+.dx-popup-normal .modal-header,
+.dx-popup-normal .modal-body,
+.dx-popup-normal .modal-footer {
+    padding: 0;
+    border:none;
+}
+
+.dx-popup-wrapper .dx-popup-content {
+    padding:40px;
+    padding-top:0;
+}
+
+.dx-popup-wrapper > .dx-overlay-content .dx-popup-title {
+    border:none !important;
+}
+
+.dx-popup-normal .modal-header {
+    margin-bottom: 12px;    
+    display: flex;
+}
+
+.dx-popup-normal .modal-header {
+    display: flex;
+    align-items: center;
+}
+
+.dx-popup-normal .modal-header .modal-tit {
+    font-size:24px;
+    line-height:36px;
+    color:#111;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.dx-popup-normal .modal-header .modal-subtit {
+    margin-left: 16px;
+    padding-left: 16px;
+    font-size:24px;
+    color:#444;
+    font-weight: 500;
+    position: relative;
+}
+
+.dx-popup-normal .modal-header .modal-subtit::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 24px;
+    background-color: #ddd;   
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.dx-popup-normal .modal-body .mc-tit {
+    font-size:16px;
+    font-weight: 700;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.dx-popup-normal .modal-body .mc-tit .mct-icon {
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image:url('/public/assets/bullet-icon.png') ;
+    background-size: cover;
+    display: block;
+    margin-right: 8px;
+}
+
+.dx-popup-normal .modal-body .grid-box {
+    width: 100%;
+    background-color: #ddd;
+    height: 234px;
+}
+
+.dx-popup-normal .modal-body .mc-ques {
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 500;
+    color:#333;
+}
+
+.dx-popup-normal .modal-body .md-table-box {
+    margin-bottom: 70px;
+}
+
+.dx-popup-normal .modal-body .mc-table {
+    border-collapse: collapse;
+    border-top:1px solid #000;
+    width: 100%;
+}
+
+.dx-popup-normal .modal-body .mc-table + .mc-table {
+    border-top: 0;
+}
+
+.dx-popup-normal .modal-body .mc-table th {
+    text-align: left;
+    width: 120px;
+    background-color:#f8f8f8;
+    padding:20px;
+    border-bottom:1px solid #EEE;
+    color:#777;
+}
+
+.dx-popup-normal .modal-body .mc-table td {
+    text-align: left;
+    padding:8px 20px;
+    border-bottom:1px solid #EEE;
+}
+
+.dx-popup-normal .modal-body .mc-table td .dx-texteditor.dx-editor-outlined {
+    width: 100%;
+    border-color: #eee;
+}
+
+.dx-popup-normal .modal-body .mc-table td .dx-texteditor.dx-editor-outlined .dx-texteditor-input {
+    padding:12px 20px;
+}
+
+.dx-popup-normal .modal-body .mc-table td.row-box {
+    padding:0;
+    border-bottom:0;
+}
+
+.dx-popup-normal .modal-body .md-table-box .mtb-button-wrap {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.dx-popup-normal .dx-popup-title.dx-toolbar .dx-closebutton .dx-button-content {
+    min-width: auto;
+    padding: 8px;
+}
+
+.dx-popup-normal .modal-footer {
+    margin-top: 16px;
+    justify-content: center;
+    display: flex;
+}
+
+.dx-popup-normal .modal-footer .dx-button {
+    margin:0 4px;   
+}
+
+.dx-popup-normal .dx-button .dx-button-content {
+    min-width: 100px;
+    padding:12px 20px;
+    box-sizing: border-box;
+    font-size:20px;
+    border-radius: 8px;
+    line-height: 24px;
+}
+
+.dx-popup-normal .dx-button.cancle-btn {
+    color:#000;
+    border:1px solid #DDD;
+    background-color:#fff;
+}
+
+.dx-popup-normal .dx-button.confirm-btn {
+    background-color: #159B97;
+    border-color: #159B97;
+    color:#fff;
+}
+
+
+
+/* error */
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body {
+    text-align: center;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .alert-img {
+    margin-bottom: 16px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-tit {
+    font-size:24px;
+    font-weight: 700;
+    line-height:36px;
+    margin-bottom: 8px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-txt {
+    font-size:20px;
+    color:#777;
+    line-height:30px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-code {
+    width: 100%;
+    background-color:#f8f8f8;
+    margin-top: 40px;
+    padding:16px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-code p {
+    font-size:16px;
+    line-height: 32px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-code p.ec-bold {
+    font-weight: 700;
+    margin-right:20px;
+    padding-right:20px;
+    position: relative;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-code p.ec-bold::after {
+    content:"";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height:14px;
+    background-color:#ddd;
+    right:0;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail {
+    width: 100%;
+    background-color:#f8f8f8;
+    border-top:1px solid #eee;
+    padding:16px 0;
+    text-align: center;
+    position: relative;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail label {
+    font-size:16px;
+    line-height:32px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail label::after {
+    display: inline-block;
+    content:"";
+    width: 20px;
+    height: 20px;
+    background-image: url('/public/assets/arrow_down_bk.png');
+    vertical-align: text-bottom;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] {
+    position: absolute;
+    top:0;
+    left:0;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] + label + .error-content {
+    max-height:0px;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    text-align: left;
+    overflow-y: auto;
+    padding:0px 40px
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] + label + .error-content ul li {
+    margin-top: 20px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] + label + .error-content ul li:first-child {
+    margin-top: 0;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] + label + .error-content ul li h3 {
+    font-size:16px;
+    line-height:24px;
+    color:#777;
+    margin-bottom: 8px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox] + label + .error-content ul li p {
+    color:#777;
+    font-size:14px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox]:checked + label + .error-content {
+    max-height:200px;
+}
+
+.dx-popup-normal .dx-popup-content .modal-body.error-popup-body .error-detail input[type=checkbox]:checked + label::after {
+    transform: rotate(180deg);
+}

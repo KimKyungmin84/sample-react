@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+ul, li, ol, li {list-style: none}
+
+* {margin: 0 0; padding: 0 0; box-sizing: border-box;}
+
+/** Layout **/
+.container-wrapper {
+  background: #fff;
+  padding: 0;
+  overflow: hidden;
+}
+
+.contents-wrapper {
+  margin: 0 0;
+  display: flex;
+}
+
+.contents-wrapper > .react-split {
+  padding:0;
+}
+
+.aside-section {
+  overflow: hidden;
+  max-width: 300px;
+  width: 100%;
+  height: calc(100vh - 162px);
+  flex: 0 1 300px;
+  border-top-right-radius: 8px;
+  /* background: linear-gradient(-45deg, rgba(5, 105, 122, 1), rgba(21, 155, 151, 1)); */
+  background: linear-gradient(135deg, #159B97 0%, #05697A 32.81%);
+  position: relative;
+  flex-basis: auto;
+  transition: all 0.5s ease;
+}
+.gnbFold .aside-section,
+.gnbFold .aside-section .aside-scroll,
+.gnbFold .contents-section .contents{
+  height: calc(100vh - 119px);
+}
+
+.aside-section::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 6px;
+  height: 14px;
+  background-image: url(/public/assets/icon_splitter.png);
+  background-size: 100%;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+}
+
+.aside-section.hide {
+  width: 0;
+}
+
+.aside-section .as-open {
+  position: fixed;
+  top: 118px;
+  left: -30px;
+  z-index: -1;
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.aside-section.hide .as-open {
+  left:0;
+  z-index: 1;
+}
+
+.contents-section {
+  width: calc(100% - 30px);
+  margin-left: 30px;
+  padding: 0 0;
+  flex-basis: auto;
+}
+
+.contents-wrapper > .react-split > .split-container.vertical > .splitter .default-splitter > .line {
+  margin:0;
+  width:5px;
+  background-color:#05697A;
+  margin-top: 20px;
+  height: calc(100% - 20px);
+  margin-left: -5px;
+  position: relative;
+  z-index: 99;
+}
+
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:100vh;
+  flex-wrap: wrap;
+}
+
+.error-page .ep-box {
+  text-align: center;
+}
+
+.error-page .ep-box h1 {
+  margin-top: 60px;
+  font-size:48px;
+}
+
+.react-split > .split-container > .splitter,
+.react-split > .split-container.vertical > .splitter{
+  width: 20px;
+  margin-left: -20px;
+  position: relative;
+  z-index: 10;
+}

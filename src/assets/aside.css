@@ -1,0 +1,258 @@
+/** Aside styles **/
+.aside-scroll {
+    overflow: hidden;
+    overflow-y: auto;
+    height: calc(100vh - 162px);
+    position: relative;
+    width: 100%;
+    min-width: 200px;
+    padding:30px;
+}
+
+.aside-scroll .as-close {
+    position: absolute;
+    display: block;
+    right: 16px;
+    top: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+.aside-scroll .as-close svg {
+    vertical-align: middle;
+}
+
+.aside-scroll .search-box {
+    display: flex;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom:2px solid #D9D9D9;
+    margin-bottom: 30px;
+}
+
+.aside-scroll .search-box .search-tit {
+    font-size:20px;
+    font-weight: 700;
+    color:#fff;
+    margin-left: 6px;
+}
+
+.aside-scroll .search-box input[type=text] {
+    border:none;
+    background-color: transparent;
+    color:#fff;
+    font-size:16px;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+.aside-scroll .search-box input[type=text]::placeholder {
+    color:#fff;
+    font-size:20px;
+    font-weight: 700;
+}
+
+.aside-scroll .search-box input[type=text]:focus {
+    outline: none;
+}
+
+.aside-scroll .search-button {
+    padding:12px 20px;
+    border:2px solid #fff;
+    color:#fff;
+    background-color: transparent;
+    display: block;
+    margin:0 auto;
+    border-radius: 40px;
+    margin-top: 40px;
+    width: 100px;
+    font-weight: 700;
+    font-size:18px;
+    transition: all 0.3s ease;
+}
+
+.aside-scroll .search-button .dx-button-content {
+    padding:0;
+}
+
+.aside-scroll .search-button.dx-state-hover {
+    background:none;
+    border-color: #fff;
+}
+
+.aside-scroll .search-button.dx-state-focused {
+    background:none;
+}
+
+.aside-scroll .search-button.dx-state-active {
+    color:#fff;
+}
+
+.aside-scroll .search-cate {
+    margin-bottom: 25px;
+}
+
+.aside-scroll .search-cate .sc-box {
+    margin-top: 25px;
+    color:#fff;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.aside-scroll .search-cate .sc-box:first-child {
+    margin-top: 0;
+}
+
+.aside-scroll .search-cate .sc-box .sc-tit {
+    font-size:16px;
+    font-weight: 500;
+    line-height:24px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.aside-scroll .search-cate .sc-box .sc-tit::after {
+    content:"·";
+    display: block;
+    position:absolute;
+    left:-12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont {
+
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .dx-field-value {
+    float: none;
+    width: 100%;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .sc-select {
+    width: 100%;
+    padding:0 10px;
+    height:40px;
+    border:1px solid #eee;
+    border-radius: 8px;    
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .sc-select:focus {
+    outline: none;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group > .dx-widget {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group > .dx-widget .dx-item {
+    margin-right: 10px;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group > .dx-widget .dx-item .dx-item-content {
+    color:#fff;
+    font-size:16px;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group .dx-radiobutton-icon {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-width: 2px;
+    border-color: #fff;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    position: relative;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group .dx-state-hover .dx-radiobutton-icon,
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group .dx-item-selected .dx-radiobutton-icon {
+    opacity: 1  ;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group .dx-radiobutton-icon .dx-radiobutton-icon-dot {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-group .dx-radiobutton-icon-checked .dx-radiobutton-icon-dot {
+    border:none;
+    width: 8px;
+    height: 8px;
+}
+
+
+
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box {
+    margin-left:18px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box:first-child {
+    margin-left: 0;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio] {
+    width: 1px;
+    height: 1px;
+    position: absolute;    
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box .radio-icon {
+    width: 20px;
+    height: 20px;
+    border:2px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio] + .radio-icon::after {
+    display: block;
+    content:"";
+    width: 0px;
+    height: 0px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    opacity:0;
+    transition: all 0.3s ease;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio]:checked + .radio-icon {
+    opacity: 1;
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio]:checked + .radio-icon::after {
+    width: 8px;
+    height: 8px;
+    opacity: 1 ;   
+}
+
+.aside-scroll .search-cate .sc-box .sc-cont .radio-box .radio-tit {
+    font-size:16px;
+    margin-left: 5px;
+}
+
+.dx-selectbox-popup-wrapper.dx-popup-wrapper .dx-overlay-content {
+    top:4px !important;
+}

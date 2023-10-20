@@ -1,0 +1,5 @@
+import { MDM_PRG_A0204010000 } from "./MDM_PRG_A0204010000";
+
+export {
+  MDM_PRG_A0204010000
+}

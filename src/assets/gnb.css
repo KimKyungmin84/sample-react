@@ -1,0 +1,298 @@
+/** GNB Style **/
+.gnb-headline {
+    height: 55px;
+    padding: 0 30px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gnb-headline .gnb-line {
+    display: flex;
+    align-items: center;
+}
+
+.gnb-headline h1 {margin: 0 0}
+
+.gnb-headline .gnb-language {
+    margin-right: 20px;
+    position: relative;
+    z-index: 99;
+}
+
+.gnb-headline .gnb-language .gl-box {
+    cursor: pointer;
+}
+
+.gnb-headline .gnb-language .gl-box img {
+    width: 24px;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.10);
+    vertical-align: middle;
+}
+
+.gnb-headline .gnb-language .gl-hover {
+    display: none;
+    position:absolute;
+    top:26px;
+    border: 1px solid #d5d5d5;
+    background: #fff;
+    box-shadow: 3px 5px 7px 0 rgba(0,0,0,.2);
+}
+
+.gnb-headline .gnb-language:hover .gl-hover {
+    display: block;
+}
+
+.gnb-headline .gnb-language .gl-box > svg {
+    transition: all 0.3s ease;
+    vertical-align: middle;
+}
+
+.gnb-headline .gnb-language:hover .gl-box > svg {
+    transform:rotate(180deg);
+}
+
+.gnb-headline .gnb-language .gl-hover .gl-lang {
+    padding:10px 20px;
+    cursor: pointer;
+}
+
+.gnb-headline .gnb-language .gl-hover .gl-lang img {
+    border-radius: 50%;
+    width: 24px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.10);
+    vertical-align: middle;
+}
+
+.gnb-headline .gnb-language .gl-hover .gl-lang.active {
+    background-color:#0a7afa;
+}
+
+.gnb-headline .gnb-user {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.gnb-headline .gnb-user:hover .personal-menu {
+    display: block;
+}
+
+.gnb-headline .gnb-user .user-icon {
+    width: 24px;
+    border-radius: 50%;
+}
+
+.gnb-headline .gnb-user .user-name {
+    font-size:12px;
+    color:#777;
+    font-weight:700;
+    margin: 0;
+    margin-left: 8px;
+}
+
+.gnb-headline .gnb-user .personal-menu {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 24px;
+    left: -12px;
+    padding-top: 6px;
+}
+
+.gnb-headline .gnb-user .personal-menu ul {
+    width: 116px;
+    border: 1px solid #eeeeee;
+    border-radius: 16px;
+    padding: 10px;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 4px 8px 0 #eeeeee;
+}
+
+.gnb-headline .gnb-user .personal-menu ul:before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 21px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    transform: rotate(45deg);
+}
+
+.gnb-headline .gnb-user .personal-menu * {
+    font-size: 14px;
+    color: #777777;
+}
+
+.gnb-headline .gnb-user .personal-menu a {
+    display: block;
+    padding: 8px;
+    line-height: 16px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.gnb-headline .gnb-user .personal-menu a:hover {
+    background: #159B97;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.gnb-headline .gnb-button {
+    cursor: pointer;
+    margin-left: 24px;
+}
+
+.gnb-headline .gnb-button .gnb-fold {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.gnbFold .gnb-headline .gnb-button .gnb-fold {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    z-index: 10;
+    background: #eeeeee;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.gnb-headline .gnb-button .gnb-fold img {
+    transition: all 0.3s;
+}
+
+.gnbFold .gnb-headline .gnb-button .gnb-fold img {
+    transform: rotate(180deg);
+}
+
+.gnb-headline .gnb-button img {
+    vertical-align: middle;
+}
+
+.main-navigation {
+    padding: 0 30px 0 30px;
+    position: relative;
+}
+
+.main-navigation .nav {
+    display: flex;
+}
+
+.main-navigation .nav .nav-item {
+    padding: 5px 0 24px 0;
+}
+
+.main-navigation .nav .nav-item .nav-link {
+    display: inline-block;
+    margin: 0 15px;
+    padding: 0 0 0 0;
+    line-height: 32px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ddd;
+    border-bottom:2px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.main-navigation .nav .nav-item .nav-link:first-child {
+    margin-left: 14px;
+}
+
+.main-navigation .nav .nav-item:last-child {
+    padding-right: 0;
+}
+
+.main-navigation .nav .nav-item .nav-link.active {
+    color: #000000;
+    border-color:  #000;
+}
+
+.main-navigation .nav .nav-item .nav-link:hover {
+    margin: 0 0;
+    padding: 0 15px;
+    background: #159B97;
+    border-radius: 17px;
+}
+
+.main-navigation .nav .nav-item .sub-depth-nav {
+    display: none;
+    position: absolute;
+    width:calc(100vw - 24px);
+    background-color:#fff;
+    box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.15);
+    border-top:2px solid #159B97;
+    top:48px;
+    left:0;
+    padding: 40px 40px 40px 118px;
+    box-sizing: border-box;
+    z-index: 1502;
+}
+
+.main-navigation .nav .nav-item:hover .sub-depth-nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 {
+    flex: 0 1 190px;
+    width: 190px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sd-tit,
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sd-tit a {
+    font-size:20px;
+    color:#000;
+    font-weight: 700;
+    line-height:32px;
+    text-decoration: none;
+}
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sd-tit a.active,
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sd-tit a:hover {
+    color: #159B97;
+}
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sd-tit,
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sub-depth3 {
+    padding-left: 18px;
+    border-left: 1px solid #dddddd;
+}
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sub-depth3 {
+    padding-top: 20px;
+}
+
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sub-link {
+    display: block;
+    font-size:16px;
+    line-height:32px;
+    color:#777;
+    text-decoration: none;
+}
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sub-link.active,
+.main-navigation .nav .nav-item .sub-depth-nav .sub-depth2 .sub-link:hover{
+    color: #000000;
+}
+
+
+
+.gnbFold .gnb-headline {
+    margin-top: -55px;
+    transition: all 0.3s;
+}
+
+.gnbFold .main-navigation .nav .nav-item {
+    padding-top: 16px;
+}

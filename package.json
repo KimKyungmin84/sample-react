@@ -1,0 +1,56 @@
+{
+  "name": "sample-type-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@geoffcox/react-splitter": "^2.1.2",
+    "@grapecity/spread-sheets": "^16.2.3",
+    "@grapecity/spread-sheets-react": "^16.2.3",
+    "@grapecity/spread-sheets-resources-ko": "^16.2.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.38",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
+    "concurrently": "^8.2.1",
+    "devextreme": "^23.1.5",
+    "devextreme-react": "^23.1.5",
+    "i18next": "^23.4.4",
+    "i18next-chained-backend": "^4.4.0",
+    "i18next-http-backend": "^2.2.1",
+    "i18next-localstorage-backend": "^4.1.1",
+    "nodemon": "^3.0.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.1.2",
+    "react-modal": "^3.16.1",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.14.1",
+    "react-scripts": "5.0.1",
+    "realgrid": "^2.6.3",
+    "recoil": "^0.7.7",
+    "swiper": "^10.3.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

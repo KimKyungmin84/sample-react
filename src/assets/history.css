@@ -1,0 +1,91 @@
+/** History Stack **/
+.history-stack {    
+    border-top: 1px solid #eeeeee;
+    background: #ffffff;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.history-stack .swiper-button-prev,
+.history-stack .swiper-button-next {
+    width: auto;
+    height: 44px;
+    line-height: 42px;
+    text-align: center;
+    cursor: pointer;
+    position:fixed;
+    top:auto;
+    z-index: 999;
+}
+
+.history-stack .swiper-button-prev {
+    left:0;
+    bottom:0;
+    padding:0 18px 0 30px;
+}
+
+.history-stack .swiper-button-next {
+    right:0;
+    bottom:0;
+    padding:0 30px 0 18px;
+}
+
+.history-stack .swiper-button-prev::after,
+.history-stack .swiper-button-next::after {
+    content:"";    
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.history-stack .swiper-button-prev.swiper-button-lock,
+.history-stack .swiper-button-next.swiper-button-lock {
+    display: flex;
+}
+
+
+.history-stack .swiper-button-prev::after {
+    background-image: url("/public/assets/arrow_left.png");
+}
+
+.history-stack .swiper-button-next::after {
+    background-image: url("/public/assets/arrow_right.png");
+}
+
+.history-stack .history-swiper {    
+    width: calc(100% - 160px);
+    margin: 0 auto;
+    padding: 0 0;
+    overflow: hidden;
+    border-left:1px solid #eee;
+}
+
+.history-stack .history-swiper .hs-cont {
+    width: auto !important;
+    height: 43px;
+    display: inline-flex;
+    align-items: center;
+    padding:0 24px;
+    border-right:1px solid #EEE;
+}
+
+.history-stack .history-swiper .hs-cont .hs-link {
+    text-decoration: none;
+    color:#aaa;
+    font-size:16px;
+}
+.history-stack .history-swiper .hs-cont .hs-link.active,
+.history-stack .history-swiper .hs-cont .hs-link:hover {
+    color: #000000;
+}
+
+.history-stack .history-swiper .hs-cont .hs-delete {
+    background-image:url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9.5" fill="white" stroke="%23EEEEEE"/><path d="M12.5 7.5L7.5 12.5" stroke="%23777777" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.5 7.5L12.5 12.5" stroke="%23777777" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>') ;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    cursor: pointer;
+} 
