@@ -2,10 +2,10 @@ import { RadioGroup } from "devextreme-react";
 import "../../../assets/aside.css";
 import { ReactComponent as Close } from "../../../image/close.svg";
 import { Button } from "devextreme-react";
+import { RadioComponent } from "../../../common/utils/commonFilter";
+import {useState} from "react";
 
-export const ASIDE_A0302000000 = () => {
-
-  const searchUse = ['All', 'Y', 'N']
+export const ASIDE_A0302000000 = ({handleInputChange, handleFetchButtonClick}) => {
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';
@@ -28,15 +28,15 @@ export const ASIDE_A0302000000 = () => {
 
       <div className="search-cate">
         <div className="sc-box">
-          <h5 className="sc-tit">
-            사용
-          </h5>
-
-          <div className="sc-cont">
-            <RadioGroup className="radio-group" items={searchUse} defaultValue={searchUse[0]} />
-          </div>
+          <RadioComponent
+            id="rad_useYn"
+            name="useYn"
+            type="USE_TYPE"
+            handleInputChange={handleInputChange}
+          ></RadioComponent>
         </div>
       </div>
+      <Button type="button" className="search-button" text="조회" onClick={handleFetchButtonClick} />
     </div>
   )
 }

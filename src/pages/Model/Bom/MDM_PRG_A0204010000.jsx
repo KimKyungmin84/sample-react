@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { Button, Popup } from "devextreme-react";
-import { Link } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import "../../../assets/contents.css";
-import "../../../assets/modal.css";
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0204010000 } from "../../../components/Include/AsideMenus";
 
@@ -27,27 +23,6 @@ const MDM_PRG_A0204010000 = (props) => {
   const toggleFavorite = () => {
     setActive(!isActive);
   }
-
-  //탭메뉴
-  const tabActive = () => {
-
-    const tabItem = document.querySelectorAll('.grid-tab');
-
-    tabItem.forEach((tab, idx)=> {    
-      tab.addEventListener('click', function(){        
-          tabItem.forEach((item)=> {
-              item.classList.remove('active');
-          });
-  
-          tabItem[idx].classList.add('active');  
-      });      
-    });
-  }
-
-  useEffect(() => {
-    tabActive();
-  }, []);
-
 
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
@@ -76,10 +51,10 @@ const MDM_PRG_A0204010000 = (props) => {
             </ul>
           </div>
 
-          <ul className="grid-tab-box">
-            <li className="grid-tab active">BOM</li>
-            <li className="grid-tab">BOM Structure</li>
-          </ul>
+          <div className="grid-tab-box">
+            <NavLink to={'/model/MDM_PRG_A0204010000'} className="grid-tab">BOM</NavLink>
+            <NavLink to={'/model/MDM_PRG_A0204020000'} className="grid-tab">BOM Structure</NavLink>
+          </div>
 
           <div className="grid-container gird-flex">
 

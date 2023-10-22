@@ -3,9 +3,9 @@ import { Button, Popup, SelectBox, TextBox } from "devextreme-react";
 import {Link, NavLink} from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
 import { Split } from "@geoffcox/react-splitter";
-import {ASIDE_A0306010000} from "../../../components/Include/AsideMenus";
+import {ASIDE_A0306020000} from "../../../components/Include/AsideMenus";
 
-const MDM_PRG_A0306010000 = (props) => {
+const MDM_PRG_A0306020000 = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopup = () => {
@@ -56,7 +56,7 @@ const MDM_PRG_A0306010000 = (props) => {
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
       <div className="aside-section">
-        <ASIDE_A0306010000 />
+        <ASIDE_A0306020000 />
       </div>
 
       <div className="contents-section">
@@ -284,4 +284,4 @@ const MDM_PRG_A0306010000 = (props) => {
     </Split>
   )
 }
-export {MDM_PRG_A0306010000};
+export {MDM_PRG_A0306020000};

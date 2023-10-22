@@ -205,6 +205,9 @@ export const SelectComponent = forwardRef((props, ref) => {
   if (props.isMultiSelect !== undefined) {
     return (
       <>
+        <h5 className="sc-tit">
+          {props.name}
+        </h5>
         <div className="sc-cont">
           <DropDownBox
             id={props.id}
@@ -224,6 +227,9 @@ export const SelectComponent = forwardRef((props, ref) => {
   } else {
     return (
       <>
+        <h5 className="sc-tit">
+          {props.name}
+        </h5>
         <div className="sc-cont">
           <SelectBox
             id={props.id}
@@ -264,7 +270,10 @@ export const InputComponent = forwardRef((props, ref) => {
   const { t } = useTranslation();
   return (
     <>
-      <div>
+      <h5 className="sc-tit">
+        {props.name}
+      </h5>
+      <div className="sc-cont">
         <TextBox
           showClearButton={true}
           id={props.id}
@@ -340,7 +349,10 @@ export const RadioComponent = forwardRef((props, ref) => {
   }, []);
   return (
     <>
-      <div>
+      <h5 className="sc-tit">
+        {props.name}
+      </h5>
+      <div className="sc-cont">
         <RadioGroup
           id={props.id}
           name={props.name}

@@ -1,6 +1,6 @@
 import { ValueType } from "realgrid";
 
-export const fields = [
+export const popUpFields = [
   // CheckBar에 대한 설정 추가
   {
     fieldName: "Company",
@@ -64,47 +64,47 @@ export const fields = [
   },
   {
     fieldName: "ActualLine",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "Remarks",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "UseYn",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "ConfirmType",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "ConfirmUserId",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName:"ConfirmDt",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "CreateUserId",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "CreateDt",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "UpdateUserId",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
   {
     fieldName: "UpdateDt",
-        dataType: ValueType.TEXT,
+    dataType: ValueType.TEXT,
   },
 ];
 
-export const columns = [
+export const popUpColumns = [
   {
     name: "Company",
     fieldName: "Company",
@@ -225,36 +225,9 @@ export const columns = [
     fieldName: "UpdateDt",
     width: "100",
   },
-  // {
-  //   name: "region",
-  //   fieldName: "region",
-  //   width: "100",
-  //   values: [],
-  //   labels: [],
-  //   editor: {
-  //     type: "list", // dropDown 구성
-  //     domainOnly: true,
-  //     textReadOnly: true
-  //   },
-  // },
-  // {
-  //   name: "useYn",
-  //   fieldName: "useYn",
-  //   width: "150",
-  //   header: {
-  //     text: "사용여부",
-  //   },
-  //   values: ["", "Y", "N"],
-  //   labels: ["선택", "Y", "N"],
-  //   editor: {
-  //     type: "list", // dropDown 구성
-  //     domainOnly: true,
-  //     textReadOnly: true
-  //   },
-  // },
 ];
 
-export const options = {
+export const popUpOptions = {
   // checkBar: {
   //   visible: true,
   //   headText: "H",

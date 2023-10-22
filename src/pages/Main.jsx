@@ -1,11 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import { ReactComponent as Favorite } from "../image/favorite.svg";
-import "../assets/contents.css";
-import "../assets/modal.css";
-import 'realgrid/dist/realgrid-style.css'
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import {Button} from "devextreme-react";
 import {ASIDE_A0101000000} from "../components/Include/AsideMenus";
@@ -72,7 +67,7 @@ const Main = (props) => {
                   ✅ <Link to="/reference/MDM_PRG_A0302000000">Grid - Master > Detail - MDM_PRG_A0302000000</Link>
                 </li>
                 <li>
-                  ☑️ <Link to="/reference/MDM_PRG_A0306010000">Grid - Tab - MDM_PRG_A0306010000</Link>
+                  ✅ <Link to="/reference/MDM_PRG_A0306010000">Grid - Tab - MDM_PRG_A0306010000</Link>
                 </li>
                 <li>
                   ✅ <Link to="/model/MDM_PRG_A0204010000">Grid - Tree - MDM_PRG_A0204010000</Link>
@@ -81,7 +76,7 @@ const Main = (props) => {
                   ✅ <Link to="/model/MDM_PRG_A0203000000">Graph - Grid - MDM_PRG_A0203000000</Link>
                 </li>
                 <li>
-                  ☑️ <Link to="/model/MDM_PRG_A0201000000">Master-Detail-Detail Grid - MDM_PRG_A0201000000</Link>
+                  ✅ <Link to="/model/MDM_PRG_A0201000000">Master-Detail-Detail Grid - MDM_PRG_A0201000000</Link>
                 </li>
                 <li>
                   ✅ <Link to="/model/MDM_PRG_A0202000000">Master-3Detail - MDM_PRG_A0202000000</Link>

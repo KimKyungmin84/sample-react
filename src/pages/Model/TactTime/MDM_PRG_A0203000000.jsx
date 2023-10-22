@@ -1,26 +1,10 @@
 import React, {useState} from "react";
-import { Button, Popup } from "devextreme-react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import "../../../assets/contents.css";
-import "../../../assets/modal.css";
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0203000000} from "../../../components/Include/AsideMenus";
 
 const MDM_PRG_A0203000000 = (props) => {
-  const [isPopupVisible, setPopupVisibility] = useState(false);
-
-  const togglePopup = () => {
-    setPopupVisibility(!isPopupVisible);
-  };
-
-  const [isPopupVisible2, setPopupVisibility2] = useState(false);
-
-  const togglePopup2 = () => {
-    setPopupVisibility2(!isPopupVisible2);
-  };
 
   const [isActive, setActive] = useState(false);
 

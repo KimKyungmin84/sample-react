@@ -13,10 +13,15 @@
 
 .dx-popup-wrapper > .dx-overlay-content .dx-popup-title {
     border:none !important;
+    padding:0;
+}
+
+.dx-popup-wrapper > .dx-overlay-content .dx-popup-title .dx-toolbar-after {
+    display: none;
 }
 
 .dx-popup-normal .modal-header {
-    margin-bottom: 12px;    
+    margin-bottom: 12px;
     display: flex;
 }
 
@@ -48,7 +53,7 @@
     position: absolute;
     width: 1px;
     height: 24px;
-    background-color: #ddd;   
+    background-color: #ddd;
     left:0;
     top:50%;
     transform:translateY(-50%);
@@ -147,7 +152,8 @@
 }
 
 .dx-popup-normal .modal-footer .dx-button {
-    margin:0 4px;   
+    margin:0 4px;
+    border-radius: 8px;
 }
 
 .dx-popup-normal .dx-button .dx-button-content {
@@ -157,6 +163,7 @@
     font-size:20px;
     border-radius: 8px;
     line-height: 24px;
+    font-weight: 500;
 }
 
 .dx-popup-normal .dx-button.cancle-btn {
@@ -169,6 +176,13 @@
     background-color: #159B97;
     border-color: #159B97;
     color:#fff;
+}
+
+.dx-popup-normal .mtb-button-wrap .dx-button.confirm-btn .dx-button-content {
+    min-width: 80px;
+    padding:8px 12px;
+    font-size:16px;
+    line-height: normal;
 }
 
 

@@ -122,17 +122,13 @@
     font-weight: bold;
 }
 
-.aside-scroll .search-cate .sc-box .sc-cont {
-
-}
-
 .aside-scroll .search-cate .sc-box .sc-cont .dx-field-value {
     float: none;
-    width: 100%;
+    width: 178px;
 }
 
 .aside-scroll .search-cate .sc-box .sc-cont .sc-select {
-    width: 100%;
+    width: 178px;
     padding:0 10px;
     height:40px;
     border:1px solid #eee;

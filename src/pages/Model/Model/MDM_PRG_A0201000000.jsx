@@ -2,14 +2,48 @@ import React, {useState} from "react";
 import { Button, Popup } from "devextreme-react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import "../../../assets/contents.css";
-import "../../../assets/modal.css";
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0201000000 } from "../../../components/Include/AsideMenus";
 
 const MDM_PRG_A0201000000 = (props) => {
+
+  const minHeight = 200;
+  const [masterDomHeight, setMasterDomHeight] = useState(270);
+  const [detailFirstDomHeight, setDetailFirstDomHeight] = useState(294);
+  const [detailSecondDomHeight, setDetailSecondDomHeight] = useState(294);
+
+  const handleMouseDown = (e, id) => {
+    const startY = e.clientY;
+    const initialHeight = masterDomHeight;
+
+    const handleMouseMove = (e) => {
+      console.log(id)
+      const deltaY = e.clientY - startY;
+      const newHeight = initialHeight + deltaY;
+      if (id === "divA") {
+        if (newHeight >= minHeight) {
+          setMasterDomHeight(newHeight);
+        }
+      } else if (id === "divB") {
+        if (newHeight >= minHeight) {
+          setDetailFirstDomHeight(newHeight);
+        }
+      } else if (id === "divC") {
+        if (newHeight >= minHeight) {
+          setDetailSecondDomHeight(newHeight);
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopup = () => {
@@ -56,96 +90,87 @@ const MDM_PRG_A0201000000 = (props) => {
             </ul>
           </div>
 
-          <div className="grid-container grid-split" style={{ height: "165%" }}>
+          <div className="grid-container grid-split">
 
-            <Split
-              initialPrimarySize="266px"
-              minPrimarySize="266px"
-              splitterSize="16px"
-              horizontal
-            >
-              <div className="grid-section grid-block-1">
-                  <div className="grid-area" style={{ height: "100%" }}>
+            <div className="grid-section grid-drag-height" style={{ height: `${masterDomHeight}px` }}>
+              <div className="grid-area">
 
-                    <div style={{ height: "100%", background: "#ddd" }}>그리드 영역</div>
+                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
 
+                <div className="grid-bottom">
+                  <div className="grid-total">
+                    총 00개(현재페이지 0/전체페이지 000000)
                   </div>
 
-                  <div className="grid-bottom">
-                    <div className="grid-total">
-                      총 00개(현재페이지 0/전체페이지 000000)
-                    </div>
-
-                    <div className="grid-buttons">
-                      <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                      <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                    </div>
+                  <div className="grid-buttons">
+                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
+                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
                   </div>
+                </div>
+
               </div>
 
-              <Split
-                initialPrimarySize="316px"
-                minPrimarySize="266px"
-                minSecondarySize="266px"
-                splitterSize="16px"
-                horizontal
-              >
-                <div className="grid-section grid-block-2">
-                  <div className="grid-headline gh2">
+              <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divA")}></div>
+            </div>
 
-                    <div className="result-info">
-                      <span className="tit-icon"></span>
-                      <span className="title">Model Tracking</span>
-                    </div>
+            <div className="grid-section grid-drag-height with-title" style={{ height: `${detailFirstDomHeight}px` }}>
+              <div className="grid-headline gh2">
+
+                <div className="result-info">
+                  <span className="tit-icon"></span>
+                  <span className="title">Model Tracking</span>
+                </div>
+              </div>
+
+              <div className="grid-area">
+
+                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
+
+                <div className="grid-bottom">
+                  <div className="grid-total">
+                    총 00개(현재페이지 0/전체페이지 000000)
                   </div>
 
-                  <div className="grid-area" style={{ height: "100%" }}>
-
-                    <div style={{ height: "100%", background: "#ddd" }}>그리드 영역</div>
-
-                  </div>
-
-                  <div className="grid-bottom">
-                    <div className="grid-total">
-                      총 00개(현재페이지 0/전체페이지 000000)
-                    </div>
-
-                    <div className="grid-buttons">
-                      <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                      <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                    </div>
+                  <div className="grid-buttons">
+                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
+                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
                   </div>
                 </div>
 
-                <div className="grid-section grid-block-2">
+              </div>
 
-                  <div className="grid-headline gh2">
+              <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divB")}></div>
+            </div>
 
-                    <div className="result-info">
-                      <span className="tit-icon"></span>
-                      <span className="title">Site Model</span>
-                    </div>
+            <div className="grid-section grid-drag-height with-title" style={{ height: `${detailSecondDomHeight}px` }}>
+
+              <div className="grid-headline gh2">
+
+                <div className="result-info">
+                  <span className="tit-icon"></span>
+                  <span className="title">Site Model</span>
+                </div>
+              </div>
+
+              <div className="grid-area">
+
+                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
+
+                <div className="grid-bottom">
+                  <div className="grid-total">
+                    총 00개(현재페이지 0/전체페이지 000000)
                   </div>
 
-                  <div className="grid-area" style={{ height: "100%" }}>
-
-                    <div style={{ height: "100%", background: "#ddd" }}>그리드 영역</div>
-
-                  </div>
-
-                  <div className="grid-bottom">
-                    <div className="grid-total">
-                      총 00개(현재페이지 0/전체페이지 000000)
-                    </div>
-
-                    <div className="grid-buttons">
-                      <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                      <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                    </div>
+                  <div className="grid-buttons">
+                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
+                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
                   </div>
                 </div>
-              </Split>
-            </Split>
+
+              </div>
+
+              <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divC")}></div>
+            </div>
 
           </div>
 

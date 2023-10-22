@@ -8,10 +8,12 @@ import {
 import {
   MDM_PRG_A0302000000,
   MDM_PRG_A0306010000,
+  MDM_PRG_A0306020000,
   MDM_PRG_A0308010000
 } from "./pages/Reference";
 import {
   MDM_PRG_A0204010000,
+  MDM_PRG_A0204020000,
   MDM_PRG_A0203000000,
   MDM_PRG_A0201000000,
   MDM_PRG_A0202000000
@@ -77,6 +79,16 @@ const AppRoutes = () => {
             />
         },
         {
+          path: "/reference/MDM_PRG_A0306020000",
+          element:
+            <MDM_PRG_A0306020000
+              title="Defect"
+              firstDepth="Reference"
+              secondDepth="Defect"
+              firstDepthPath="/reference"
+            />
+        },
+        {
           path: "/reference/MDM_PRG_A0308010000",
           element:
             <MDM_PRG_A0308010000
@@ -103,6 +115,16 @@ const AppRoutes = () => {
               title="BOM"
               firstDepth="Model"
               secondDepth="BOM"
+              firstDepthPath="/model"
+            />
+        },
+        {
+          path: "/model/MDM_PRG_A0204020000",
+          element:
+            <MDM_PRG_A0204020000
+              title="BOM Structure"
+              firstDepth="Model"
+              secondDepth="BOM Structure"
               firstDepthPath="/model"
             />
         },

@@ -1,5 +1,5 @@
 /** History Stack **/
-.history-stack {    
+.history-stack {
     border-top: 1px solid #eeeeee;
     background: #ffffff;
     justify-content: space-between;
@@ -33,7 +33,7 @@
 
 .history-stack .swiper-button-prev::after,
 .history-stack .swiper-button-next::after {
-    content:"";    
+    content:"";
     width: 32px;
     height: 32px;
     background-size: cover;
@@ -54,7 +54,7 @@
     background-image: url("/public/assets/arrow_right.png");
 }
 
-.history-stack .history-swiper {    
+.history-stack .history-swiper {
     width: calc(100% - 160px);
     margin: 0 auto;
     padding: 0 0;
@@ -75,6 +75,7 @@
     text-decoration: none;
     color:#aaa;
     font-size:16px;
+    font-weight: 500;
 }
 .history-stack .history-swiper .hs-cont .hs-link.active,
 .history-stack .history-swiper .hs-cont .hs-link:hover {

@@ -230,7 +230,7 @@
 .main-navigation .nav .nav-item .sub-depth-nav {
     display: none;
     position: absolute;
-    width:calc(100vw - 24px);
+    width: 100%;
     background-color:#fff;
     box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.15);
     border-top:2px solid #159B97;

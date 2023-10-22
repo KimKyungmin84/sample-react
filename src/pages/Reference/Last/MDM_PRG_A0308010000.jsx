@@ -2,10 +2,6 @@ import React, {useState} from "react";
 import { Button, Popup, SelectBox, TextBox } from "devextreme-react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import "../../../assets/contents.css";
-import "../../../assets/modal.css";
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0308010000} from "../../../components/Include/AsideMenus";
 

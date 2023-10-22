@@ -1,15 +1,131 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { Button, Popup } from "devextreme-react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import "../../../assets/contents.css";
-import "../../../assets/modal.css";
-import 'devextreme/dist/css/dx.light.css';
-import 'devextreme/dist/css/dx.common.css';
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0302000000 } from "../../../components/Include/AsideMenus";
+import AxiosCustomInstance from "../../../common/api/AxiosCustomInstance";
+import useErrorHandling from "../../../common/hooks/useErrorHandling";
+import {GridView, LocalDataProvider} from "realgrid";
+import { detailFields, detailColumns, detailOptions } from "./MDM_PRG_A0302000000_detailData";
+import { sizeFields, sizeColumns, sizeOptions } from "./MDM_PRG_A0302000000_sizeData";
 
 const MDM_PRG_A0302000000 = (props) => {
+  const [sizeDataProvider, setSizeDataProvider] = useState(null);
+  const [detailDataProvider, setDetailDataProvider] = useState(null);
+  const [sizeGridView, setSizeGridView] = useState(null);
+  const [detailGridView, setDetailGridView] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+  const sizeGridElement = useRef(null);
+  const detailGridElement = useRef(null);
+  const [sizeGridRowCnt, setSizeGridRowCnt] = useState(0); //그리드카운트 표시용
+  const [detailGridRowCnt, setDetailGridRowCnt] = useState(0); //그리드카운트 표시용
+  const [formData, setFormData] = useState({});
+  const { setError } = useErrorHandling(); // 커스텀 훅스 에러 사용
+
+  // formData 초기 값 지정
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+    }));
+  }, []);
+
+  const handleInputChange = (e) => {
+    let name;
+    let value;
+
+    // Radio
+    if (e.component.NAME === "dxRadioGroup") {
+      name = e.element.accessKey;
+      value = e.value;
+    }
+    // SelectBox
+    else if (e.component.NAME === "dxSelectBox") {
+      name = e.itemData.name;
+      value = e.itemData.value;
+    }
+    // textBox
+    else {
+      name = e.event.target.name;
+      value = e.event.target.value;
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const sizeContainer = sizeGridElement.current;
+    const sizeProvider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
+    const sizeGrid = new GridView(sizeContainer);
+
+    const detailContainer = detailGridElement.current;
+    const detailProvider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
+    const detailGrid = new GridView(detailContainer);
+
+    sizeGrid.setDataSource(sizeProvider);
+    sizeProvider.setFields(sizeFields);
+    sizeGrid.setColumns(sizeColumns);
+    sizeGrid.setOptions(sizeOptions);
+
+    detailGrid.setDataSource(detailProvider);
+    detailProvider.setFields(detailFields);
+    detailGrid.setColumns(detailColumns);
+    detailGrid.setOptions(detailOptions);
+
+    setSizeDataProvider(sizeProvider);
+    setSizeGridView(sizeGrid);
+
+    setDetailDataProvider(detailProvider);
+    setDetailGridView(detailGrid);
+
+    sizeGrid.onCurrentChanged = function (grid, oldRow, newRow){
+      detailGridView.cancel();
+      if(newRow < 0) return;
+
+    }
+    return () => {
+      sizeGrid.commit(true);
+      sizeProvider.clearRows();
+      sizeGrid.destroy();
+      sizeProvider.destroy();
+
+      detailGrid.commit(true);
+      detailProvider.clearRows();
+      detailGrid.destroy();
+      detailProvider.destroy();
+    };
+  }, []);
+
+  const handleFetchButtonClick = async () => {
+    sizeGridView.cancel(); // Cancel any ongoing edit before fetching new data
+
+    setIsFetching(true);
+
+    console.log("===========:::", JSON.stringify(formData));
+
+    try {
+      const response = await AxiosCustomInstance({}).post("http://localhost:10000/size/sizeList",formData);
+      const data = response.data;
+
+      if (sizeDataProvider) {
+        if (Array.isArray(data)) {
+          sizeDataProvider.setRows(data);
+        } else {
+          sizeDataProvider.setRows([data]); // 데이터를 배열로 감싸서 설정
+        }
+        setSizeGridRowCnt(sizeDataProvider.getRowCount()); //데이타 카운트 처리
+      }
+    }catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error)
+    }finally {
+      setIsFetching(false);
+    }
+  };
+
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopup = () => {
@@ -32,7 +148,7 @@ const MDM_PRG_A0302000000 = (props) => {
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
       <div className="aside-section">
-        <ASIDE_A0302000000 />
+        <ASIDE_A0302000000 handleInputChange={handleInputChange} handleFetchButtonClick={handleFetchButtonClick} />
       </div>
 
       <div className="contents-section">
@@ -62,7 +178,9 @@ const MDM_PRG_A0302000000 = (props) => {
 
               <div className="grid-area">
 
-                <div style={{ height: "600px", background: "#ddd" }}>그리드 영역</div>
+                <div style={{ height: "600px", background: "#ddd" }}>
+                  <div ref={sizeGridElement} style={{ height: "600px", width: "100%" }}></div>
+                </div>
 
               </div>
 
@@ -92,7 +210,9 @@ const MDM_PRG_A0302000000 = (props) => {
 
               <div className="grid-area">
 
-                <div style={{ height: "600px", background: "#ddd" }}>그리드 영역</div>
+                <div style={{ height: "600px", background: "#ddd" }}>
+                  <div ref={detailGridElement} style={{ height: "600px", width: "100%" }}></div>
+                </div>
 
               </div>
 

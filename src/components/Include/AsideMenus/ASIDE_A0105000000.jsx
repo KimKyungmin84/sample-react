@@ -33,134 +33,89 @@ export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) =
       <div className="search-cate">
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Company
-          </h5>
-
-          <div className="sc-cont">
-            <SelectComponent
-              id="cbo_Company"
-              name="Company"
-              url="http://localhost:10000/filter/filterCompany"
-              handleInputChange={handleInputChange}
-              paramValue={formData.Company}
-            ></SelectComponent>
-          </div>
+          <SelectComponent
+            id="cbo_Company"
+            name="Company"
+            url="http://localhost:10000/filter/filterCompany"
+            handleInputChange={handleInputChange}
+            paramValue={formData.Company}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Factory
-          </h5>
-
-          <div className="sc-cont">
-            <SelectComponent
-              id="cbo_Factory"
-              name="Factory"
-              url="http://localhost:10000/filter/filterFactory"
-              handleInputChange={handleInputChange}
-              paramValue={formData.Factory}
-            ></SelectComponent>
-          </div>
+          <SelectComponent
+            id="cbo_Factory"
+            name="Factory"
+            url="http://localhost:10000/filter/filterFactory"
+            handleInputChange={handleInputChange}
+            paramValue={formData.Factory}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Plant
-          </h5>
-
-          <div className="sc-cont">
-            <SelectComponent
-              id="cbo_Plant"
-              name="Plant"
-              url="http://localhost:10000/filter/filterPlant"
-              handleInputChange={handleInputChange}
-              paramValue={formData.Plant}
-            ></SelectComponent>
-          </div>
+          <SelectComponent
+            id="cbo_Plant"
+            name="Plant"
+            url="http://localhost:10000/filter/filterPlant"
+            handleInputChange={handleInputChange}
+            paramValue={formData.Plant}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Operation
-          </h5>
-
-          <div className="sc-cont">
-            <SelectComponent
-              id="cbo_Oper"
-              name="Oper"
-              url="http://localhost:10000/filter/filterOper"
-              handleInputChange={handleInputChange}
-              paramValue={formData.Oper}
-            ></SelectComponent>
-          </div>
-        </div>
-
-
-        <div className="sc-box">
-          <h5 className="sc-tit">
-            Line
-          </h5>
-
-          <div className="sc-cont">
-            <InputComponent
-              id="tb_Line"
-              name="Line"
-              handleInputChange={handleInputChange}
-            ></InputComponent>
-          </div>
+          <SelectComponent
+            id="cbo_Oper"
+            name="Oper"
+            url="http://localhost:10000/filter/filterOper"
+            handleInputChange={handleInputChange}
+            paramValue={formData.Oper}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Line Name
-          </h5>
-
-          <div className="sc-cont">
-            <InputComponent
-              id="tb_LineName"
-              name="LineName"
-              handleInputChange={handleInputChange}
-            ></InputComponent>
-          </div>
+          <InputComponent
+            id="tb_Line"
+            name="Line"
+            handleInputChange={handleInputChange}
+          ></InputComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            사용
-          </h5>
-
-          <div className="sc-cont">
-            <li className="nav-item">
-              <RadioComponent
-                id="rad_UseYn"
-                name="UseYn"
-                type="USE_TYPE"
-                handleInputChange={handleInputChange}
-              ></RadioComponent>
-            </li>
-          </div>
+          <InputComponent
+            id="tb_LineName"
+            name="LineName"
+            handleInputChange={handleInputChange}
+          ></InputComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            확정
-          </h5>
-
-          <div className="sc-cont">
-            <RadioComponent
-              id="rad_ConfirmYn"
-              name="ConfirmYn"
-              type="CONFIRM_TYPE"
+          <RadioComponent
+              id="rad_VirtualYn"
+              name="VirtualYn"
+              type="VIRTUAL_TYPE"
               handleInputChange={handleInputChange}
-            ></RadioComponent>
-          </div>
+          ></RadioComponent>
         </div>
 
+        <div className="sc-box">
+          <RadioComponent
+            id="rad_UseYn"
+            name="UseYn"
+            type="USE_TYPE"
+            handleInputChange={handleInputChange}
+          ></RadioComponent>
+        </div>
+
+        <div className="sc-box">
+          <RadioComponent
+            id="rad_ConfirmYn"
+            name="ConfirmYn"
+            type="CONFIRM_TYPE"
+            handleInputChange={handleInputChange}
+          ></RadioComponent>
+        </div>
       </div>
-
       <Button type="button" className="search-button" text="조회" onClick={handleFetchButtonClick} />
-
     </div>
   )
 }

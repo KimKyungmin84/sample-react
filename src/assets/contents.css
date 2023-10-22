@@ -54,6 +54,7 @@
     border-radius: 12px;
     transition: all 0.3s ease;
     margin-left:16px;
+    text-decoration: none;
 }
 
 .contents .grid-tab-box .grid-tab:first-child {
@@ -94,10 +95,38 @@
     vertical-align: middle;
 }
 
+.grid-section {
+    position: relative;
+    user-select: none;
+}
+
 .grid-section + .grid-section,
 .grid-section + .grid-two-wrap,
 .grid-two-wrap + .grid-section {
     margin-top:20px;
+}
+
+.grid-section.grid-drag-height + .grid-section.grid-drag-height {
+    margin-top: 0;
+}
+
+.grid-section.grid-drag-height {
+    padding-bottom: 0;
+}
+
+.grid-section.grid-drag-height .grid-area {
+    height: calc(100% - 16px);
+}
+.grid-section.grid-drag-height.with-title .grid-area {
+    height: calc(100% - 48px);
+}
+
+.grid-section.grid-drag-height .grid-area .grid-inner {
+    height: calc(100% - 65px);
+}
+
+.grid-section.grid-drag-height.with-title .grid-area .grid-inner {
+    height: calc(100% - 65px);
 }
 
 .gird-flex {
@@ -155,7 +184,7 @@
 }
 
 .grid-headline.gh2 {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .grid-headline .grid-top-buttons {
@@ -263,4 +292,30 @@
 
 .grid-block-2 {
     height: calc(100% - 110px);
+}
+
+.drag-handle {
+    margin: 0 !important;
+    height: 16px !important;
+    border:1px solid #AAA;
+    background-color:#eee !important;
+    position: relative;
+    cursor: row-resize;
+}
+
+.drag-handle::after {
+    content:"";
+    display: block;
+    position: absolute;
+    background-image:url('/public/assets/icon_splitter2.png');
+    background-repeat: no-repeat;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 6px;
+}
+
+.dx-texteditor-input {
+    width: 178px;
 }
