@@ -4,14 +4,13 @@ import App from './App';
 import 'devextreme/dist/css/dx.light.css';
 import 'devextreme/dist/css/dx.common.css';
 import './index.css';
-import "./index.css";
-import "./assets/contents.css";
-import "./assets/modal.css";
+import './assets/contents.css';
+import './assets/modal.css';
 import 'realgrid/dist/realgrid-style.css'
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import CatchedErrorBoundary from "./common/components/error/components/CatchedErrorBoundary";
+import CatchedErrorBoundary from './common/components/error/components/CatchedErrorBoundary';
 import { RecoilRoot } from 'recoil';
 
 

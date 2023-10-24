@@ -124,6 +124,7 @@
 .dx-popup-normal .modal-body .mc-table td .dx-texteditor.dx-editor-outlined {
     width: 100%;
     border-color: #eee;
+    border-radius: 8px;
 }
 
 .dx-popup-normal .modal-body .mc-table td .dx-texteditor.dx-editor-outlined .dx-texteditor-input {
@@ -170,12 +171,14 @@
     color:#000;
     border:1px solid #DDD;
     background-color:#fff;
+    border-radius: 8px;
 }
 
 .dx-popup-normal .dx-button.confirm-btn {
     background-color: #159B97;
     border-color: #159B97;
     color:#fff;
+    border-radius: 8px;
 }
 
 .dx-popup-normal .mtb-button-wrap .dx-button.confirm-btn .dx-button-content {

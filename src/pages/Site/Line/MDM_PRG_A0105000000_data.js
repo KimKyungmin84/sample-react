@@ -109,6 +109,13 @@ export const columns = [
     name: "Company",
     fieldName: "Company",
     width: "100",
+    values: [],
+    labels: [],
+    editor: {
+      type: "list", // dropDown 구성
+      domainOnly: true,
+      textReadOnly: true
+    },
   },
   // {
   //   name: "Factory",
@@ -119,6 +126,13 @@ export const columns = [
     name: "Plant",
     fieldName: "Plant",
     width: "100",
+    values: [],
+    labels: [],
+    editor: {
+      type: "list", // dropDown 구성
+      domainOnly: true,
+      textReadOnly: true
+    },
   },
   {
     name: "PhysicalPlant",
@@ -144,6 +158,13 @@ export const columns = [
     name: "Oper",
     fieldName: "Oper",
     width: "100",
+    values: [],
+    labels: [],
+    editor: {
+      type: "list", // dropDown 구성
+      domainOnly: true,
+      textReadOnly: true
+    },
   },
   {
     name: "LineType",
@@ -212,6 +233,11 @@ export const columns = [
   },
   {
     name: "CreateUserId",
+    fieldName: "CreateUserId",
+    width: "100",
+  },
+  {
+    name: "CreateDt",
     fieldName: "CreateDt",
     width: "100",
   },

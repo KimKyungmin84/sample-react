@@ -17,6 +17,7 @@
     "concurrently": "^8.2.1",
     "devextreme": "^23.1.5",
     "devextreme-react": "^23.1.5",
+    "fund": "^1.0.0",
     "i18next": "^23.4.4",
     "i18next-chained-backend": "^4.4.0",
     "i18next-http-backend": "^2.2.1",

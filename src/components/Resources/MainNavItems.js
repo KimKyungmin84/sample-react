@@ -59,7 +59,7 @@ const MainNavItems = [
           },
           {
             title: "BOM Structure",
-            path: "/model/bom/bom-structure"
+            path: "/model/MDM_PRG_A0204020000"
           },
           {
             title: "Item List",
@@ -108,7 +108,7 @@ const MainNavItems = [
           },
           {
             title: "불량코드그룹",
-            path: "/reference/defect/code-group"
+            path: "/reference/defect/MDM_PRG_A0306020000"
           },
         ],
       },

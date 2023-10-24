@@ -234,6 +234,7 @@ export const SelectComponent = forwardRef((props, ref) => {
           <SelectBox
             id={props.id}
             name={props.name}
+            className="sc-select"
             selectedItem={props.isSelect ? "Select" : ""}
             dataSource={options}
             displayExpr="label"

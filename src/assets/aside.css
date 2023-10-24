@@ -125,6 +125,7 @@
 .aside-scroll .search-cate .sc-box .sc-cont .dx-field-value {
     float: none;
     width: 178px;
+    border-radius: 8px;
 }
 
 .aside-scroll .search-cate .sc-box .sc-cont .sc-select {
@@ -132,7 +133,7 @@
     padding:0 10px;
     height:40px;
     border:1px solid #eee;
-    border-radius: 8px;    
+    border-radius: 8px;
 }
 
 .aside-scroll .search-cate .sc-box .sc-cont .sc-select:focus {
@@ -205,7 +206,7 @@
 .aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio] {
     width: 1px;
     height: 1px;
-    position: absolute;    
+    position: absolute;
 }
 
 .aside-scroll .search-cate .sc-box .sc-cont .radio-box .radio-icon {
@@ -241,7 +242,7 @@
 .aside-scroll .search-cate .sc-box .sc-cont .radio-box input[type=radio]:checked + .radio-icon::after {
     width: 8px;
     height: 8px;
-    opacity: 1 ;   
+    opacity: 1 ;
 }
 
 .aside-scroll .search-cate .sc-box .sc-cont .radio-box .radio-tit {
