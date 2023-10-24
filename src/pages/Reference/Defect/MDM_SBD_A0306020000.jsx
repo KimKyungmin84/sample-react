@@ -1,11 +1,161 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { Button, Popup, SelectBox, TextBox } from "devextreme-react";
 import {Link, NavLink} from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
 import { Split } from "@geoffcox/react-splitter";
 import {ASIDE_A0306020000} from "../../../components/Include/AsideMenus";
+import {GridView, LocalDataProvider} from "realgrid";
+import {columns, fields, options} from "./MDM_PRG_A0306020000_data";
+import AxiosCustomInstance from "../../../common/api/AxiosCustomInstance"
+import useErrorHandling from "../../../common/hooks/useErrorHandling";
 
 const MDM_PRG_A0306020000 = (props) => {
+  const [dataProvider, setDataProvider] = useState(null);
+  // const [popUpDataProvider, setPopUpDataProvider] = useState(null);
+  const [gridView, setGridView] = useState(null);
+  // const [popUpGridView, setPopUpGridView] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+  const realgridElement = useRef(null);
+  // const popUpGridElement = useRef(null);
+  const [formData, setFormData] = useState({});
+  // const [popUpData, setPopUpData] = useState({}); // popUpData 상태 추가
+  const { setError } = useErrorHandling(); // 커스텀 훅스 에러 사용
+  const [gridRowCnt, setGridRowCnt] = useState(0); //그리드카운트 표시용
+
+  // formData 초기 값 지정
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+    }));
+  }, []);
+
+  const handleInputChange = (e) => {
+    let name;
+    let value;
+
+    // Radio
+    if (e.component.NAME === "dxRadioGroup") {
+      name = e.element.accessKey;
+      value = e.value;
+    }
+    // SelectBox
+    else if (e.component.NAME === "dxSelectBox") {
+      name = e.itemData.name;
+      value = e.itemData.value;
+    }
+    // textBox
+    else {
+      name = e.event.target.name;
+      value = e.event.target.value;
+    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+  };
+
+  useEffect(() => {
+    const container = realgridElement.current;
+    const provider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
+    const grid = new GridView(container);
+
+    grid.setDataSource(provider);
+    provider.setFields(fields);
+    grid.setColumns(columns);
+
+    setDataProvider(provider);
+    setGridView(grid);
+
+    grid.setOptions(options);
+
+    grid.onCellClicked = function (gridSel, clickData) {
+      const currentRow = gridSel.getCurrent().dataRow;
+
+      if(currentRow === -1){
+        return;
+      }
+
+      const defectGroupColumn = gridSel.columnByName("defectGroup");
+      const currState = provider.getRowState(currentRow);
+
+      if (currentRow >= 0 && defectGroupColumn) {
+
+        const rowState = provider.getRowState(currentRow);
+        if (rowState === "created" && ( defectGroupColumn.name === gridSel.getCurrent().fieldName)) {
+          // idColumn.editor = { ...idColumn.editor, readOnly: false };
+          grid.setColumnProperty("defectGroup", "readOnly", false);
+        }else{
+          grid.setColumnProperty("defectGroup", "readOnly", true);
+        }
+      }
+
+      grid.setColumnProperty("UseYn", "readOnly", true);
+      grid.setColumnProperty("ConfirmType", "readOnly", true);
+      grid.setColumnProperty("ConfirmUserId", "readOnly", true);
+      grid.setColumnProperty("ConfirmDt", "readOnly", true);
+      grid.setColumnProperty("CreateUserId", "readOnly", true);
+      grid.setColumnProperty("CreateDt", "readOnly", true);
+      grid.setColumnProperty("UpdateUserId", "readOnly", true);
+      grid.setColumnProperty("UpdateDt", "readOnly", true);
+
+      return true; // 이벤트 처리를 계속 진행
+    };
+
+    grid.onCurrentRowChanged = function (gridSel, oldRow, newRow) {
+
+      let rowState = newRow > -1 ? provider.getRowState(newRow) : "";
+      let editable =  (rowState === "created");
+
+      if(rowState === "deleted"){
+        editable = false
+      }else{
+        editable = true
+      }
+
+      gridSel.setEditOptions({
+        "editable": editable
+      })
+      return true; // 이벤트 처리를 계속 진행
+    };
+
+    grid.setCheckableExpression("(state = 'c') or (state = 'u') or (state = 'd')", true);
+
+    return () => {
+      grid.commit(true);
+      provider.clearRows();
+      grid.destroy();
+      provider.destroy();
+    };
+  }, []);
+
+  const handleFetchButtonClick = async () => {
+    gridView .cancel(); // Cancel any ongoing edit before fetching new data
+    setIsFetching(true);
+
+    try {
+
+      console.log("===========:::", JSON.stringify(formData));
+      const response = await AxiosCustomInstance({}).post("http://localhost:10000/filter/defectInfomationList",formData);
+      const data = response.data;
+
+      if (dataProvider) {
+        if (Array.isArray(data)) {
+          dataProvider.setRows(data);
+        } else {
+          dataProvider.setRows([data]); // 데이터를 배열로 감싸서 설정
+        }
+        setGridRowCnt(dataProvider.getRowCount()); //데이타 카운트 처리
+      }
+
+    }catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error)
+    }finally {
+      setIsFetching(false);
+    }
+  };
+
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopup = () => {
@@ -56,7 +206,7 @@ const MDM_PRG_A0306020000 = (props) => {
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
       <div className="aside-section">
-        <ASIDE_A0306020000 />
+        <ASIDE_A0306020000 handleInputChange={handleInputChange} handleFetchButtonClick={handleFetchButtonClick} />
       </div>
 
       <div className="contents-section">
@@ -91,7 +241,7 @@ const MDM_PRG_A0306020000 = (props) => {
 
               <div className="grid-area">
 
-                <div style={{ height: "500px", background: "#ddd" }}>그리드 영역</div>
+                <div ref={realgridElement} style={{ height: "500px", background: "#ddd" }}>그리드 영역</div>
 
               </div>
 

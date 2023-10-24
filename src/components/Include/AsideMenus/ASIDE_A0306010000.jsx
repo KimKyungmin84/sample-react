@@ -2,9 +2,14 @@ import { RadioGroup, TextBox } from "devextreme-react";
 import "../../../assets/aside.css";
 import { ReactComponent as Close } from "../../../image/close.svg";
 import { Button } from "devextreme-react";
+import {
+  InputComponent, RadioComponent
+} from "../../../common/utils/commonFilter";
+import { useState } from "react";
 
-export const ASIDE_A0306010000 = () => {
+export const ASIDE_A0306010000 = ({handleInputChange, handleFetchButtonClick}) => {
 
+  const [formData, setFormData] = useState({});
   const searchUse = ['All', 'Y', 'N']
   const searchConfirm = ['All', 'P', 'Y', 'N']
 
@@ -12,7 +17,7 @@ export const ASIDE_A0306010000 = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';
   }
 
-    return (
+  return (
       <div className="aside-scroll">
 
         <div className="search-box">
@@ -24,63 +29,71 @@ export const ASIDE_A0306010000 = () => {
         </div>
 
         <span className="as-close" onClick={closeAside}>
-        <Close/>
-      </span>
+      <Close/>
+    </span>
 
         <div className="search-cate">
 
           <div className="sc-box">
-            <h5 className="sc-tit">
-              Defect Code
-            </h5>
-
             <div className="sc-cont">
-              <TextBox inputAttr="" className="dx-field-value" defaultValue="" />
+              <InputComponent
+                  id="tb_Defect"
+                  name="DefectCode"
+                  handleInputChange={handleInputChange}
+              ></InputComponent>
+              {/*<TextBox inputAttr="" className="dx-field-value" defaultValue="" />*/}
             </div>
           </div>
 
           <div className="sc-box">
-            <h5 className="sc-tit">
-              Defect Name
-            </h5>
-
             <div className="sc-cont">
-              <TextBox inputAttr="" className="dx-field-value" defaultValue="" />
+              <InputComponent
+                  id="tb_DefectName"
+                  name="DefectName"
+                  handleInputChange={handleInputChange}
+              ></InputComponent>
+              {/*<TextBox inputAttr="" className="dx-field-value" defaultValue="" />*/}
             </div>
           </div>
 
           <div className="sc-box">
-            <h5 className="sc-tit">
-              Defect Type
-            </h5>
-
             <div className="sc-cont">
-              <TextBox inputAttr="" className="dx-field-value" defaultValue="" />
+              <InputComponent
+                  id="tb_DefectType"
+                  name="DefectType"
+                  handleInputChange={handleInputChange}
+              ></InputComponent>
+              {/*<TextBox inputAttr="" className="dx-field-value" defaultValue="" />*/}
             </div>
           </div>
 
           <div className="sc-box">
-            <h5 className="sc-tit">
-              사용
-            </h5>
-
             <div className="sc-cont">
-              <RadioGroup className="radio-group" items={searchUse} defaultValue={searchUse[0]} />
+              <li className="nav-item">
+                <RadioComponent
+                    id="rad_UseYn"
+                    name="UseYn"
+                    type="USE_TYPE"
+                    handleInputChange={handleInputChange}
+                ></RadioComponent>
+              </li>
+              {/*<RadioGroup className="radio-group" items={searchUse} defaultValue={searchUse[0]} />*/}
             </div>
           </div>
 
           <div className="sc-box">
-            <h5 className="sc-tit">
-              확정
-            </h5>
-
             <div className="sc-cont">
-              <RadioGroup className="radio-group" items={searchConfirm} defaultValue={searchConfirm[0]} />
+              <RadioComponent
+                  id="rad_ConfirmYn"
+                  name="ConfirmYn"
+                  type="CONFIRM_TYPE"
+                  handleInputChange={handleInputChange}
+              ></RadioComponent>
             </div>
           </div>
         </div>
 
-        <Button type="button" className="search-button" text="조회" />
+        <Button type="button" className="search-button" text="조회" onClick={handleFetchButtonClick} />
       </div>
-    )
+  )
 }
