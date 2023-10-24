@@ -4,7 +4,7 @@ import {Link, NavLink} from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
 import { Split } from "@geoffcox/react-splitter";
 import {ASIDE_A0306010000} from "../../../components/Include/AsideMenus";
-import {GridView, LocalDataProvider} from "realgrid";
+import {CellIndex, GridView, LocalDataProvider} from "realgrid";
 // import {columns, fields, options} from "../../Site/Line/MDM_PRG_A0105000000_data";
 import {columns, fields, options} from "./MDM_PRG_A0306010000_data";
 // import {popUpColumns, popUpFields, popUpOptions} from "../../Site/Line/MDM_PRG_A0105000000_popUpData";
@@ -174,8 +174,6 @@ const MDM_PRG_A0306010000 = (props) => {
       })
       return true; // 이벤트 처리를 계속 진행
     };
-
-    grid.onEditSearch()
 
     grid.setCheckableExpression("(state = 'c') or (state = 'u') or (state = 'd')", true);
 
