@@ -3,13 +3,18 @@ import "../../../assets/aside.css";
 import {ReactComponent as Close} from "../../../image/close.svg";
 import {InputComponent, RadioComponent, SelectComponent} from "../../../common/utils/commonFilter";
 
-export const ASIDE_A0204010000 = ({handleInputChange, handleFetchButtonClick}) => {
+export const ASIDE_A0204010000_Custom = ({handleInputChange, handleFetchButtonClick}) => {
+
+  // const searchSelect = ['All', 'EX']
+  // const searchUse = ['All', 'Y', 'N']
+  // const searchConfirm = ['All', 'P', 'Y', 'N']
+  // const searchItem = ['PH', 'LM', 'FM']
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';
   }
 
-    return (
+  return (
       <div className="aside-scroll">
 
         <div className="search-box">
@@ -27,55 +32,54 @@ export const ASIDE_A0204010000 = ({handleInputChange, handleFetchButtonClick}) =
         <div className="search-cate">
 
           <div className="sc-box">
-            <InputComponent
-                id="StyleNo"
-                name="StyleNo"
-                handleInputChange={handleInputChange}
-            ></InputComponent>
+              <InputComponent
+                  id="StyleNo"
+                  name="StyleNo"
+                  handleInputChange={handleInputChange}
+              ></InputComponent>
           </div>
 
           <div className="sc-box">
-            <SelectComponent
-                id="cbo_Size"
-                name="Size"
-                url={'http://localhost:10000/filter/filterSize'}
-                handleInputChange={handleInputChange}
-            ></SelectComponent>
+              <SelectComponent
+                  id="Size"
+                  name="Size"
+                  handleInputChange={handleInputChange}
+              ></SelectComponent>
           </div>
 
           <div className="sc-box">
-            <InputComponent
-                id="Part"
-                name="Part"
-                handleInputChange={handleInputChange}
-            ></InputComponent>
+              <InputComponent
+                  id="Part"
+                  name="Part"
+                  handleInputChange={handleInputChange}
+              ></InputComponent>
           </div>
 
           <div className="sc-box">
-            <RadioComponent
-                id="rad_IncludeItem"
-                name="IncludeItem"
-                type="INCLUDE_TYPE"
-                handleInputChange={handleInputChange}
-            ></RadioComponent>
+              <RadioComponent
+                  id="rad_IncludeItem"
+                  name="IncludeItem"
+                  type="INCLUDE_TYPE"
+                  handleInputChange={handleInputChange}
+              ></RadioComponent>
           </div>
 
           <div className="sc-box">
-            <RadioComponent
-                id="rad_UseYn"
-                name="UseYn"
-                type="USE_TYPE"
-                handleInputChange={handleInputChange}
-            ></RadioComponent>
+              <RadioComponent
+                  id="rad_UseYn"
+                  name="UseYn"
+                  type="USE_TYPE"
+                  handleInputChange={handleInputChange}
+              ></RadioComponent>
           </div>
 
           <div className="sc-box">
-            <RadioComponent
-                id="rad_ConfirmYn"
-                name="ConfirmYn"
-                type="CONFIRM_TYPE"
-                handleInputChange={handleInputChange}
-            ></RadioComponent>
+              <RadioComponent
+                  id="rad_ConfirmYn"
+                  name="ConfirmYn"
+                  type="CONFIRM_TYPE"
+                  handleInputChange={handleInputChange}
+              ></RadioComponent>
           </div>
 
         </div>
@@ -83,5 +87,5 @@ export const ASIDE_A0204010000 = ({handleInputChange, handleFetchButtonClick}) =
         <Button type="button" className="search-button" text="조회" onClick={handleFetchButtonClick} />
 
       </div>
-    )
+  )
 }
