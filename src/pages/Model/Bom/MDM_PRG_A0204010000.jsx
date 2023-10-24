@@ -9,9 +9,8 @@ import {
   getBOMChildTreeData,
   getBOMGridData,
   getBOMRoutingGridData,
-  getBOMTreeData, useBOMGridData,
   useBOMTopTreeData
-} from "../../../common/hooks/requestApi";
+} from "../../../common/hooks/useTreeApi";
 import {MDM_PRG_A0204010000_BOM_GRID} from "./MDM_PRG_A0204010000_BOM_GRID";
 import {MDM_PRG_A0204010000_BOM_ROUTING_GRID} from "./MDM_PRG_A0204010000_BOM_ROUTING_GRID";
 
