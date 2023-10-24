@@ -1,12 +1,33 @@
-import React, {useState} from "react";
-import { Button, Popup } from "devextreme-react";
+import React, {useEffect, useRef, useState} from "react";
+import {Button, Popup} from "devextreme-react";
 import {Link, NavLink} from "react-router-dom";
-import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import { Split } from "@geoffcox/react-splitter";
-import { ASIDE_A0204010000 } from "../../../components/Include/AsideMenus";
+import {ReactComponent as Favorite} from "../../../image/favorite.svg";
+import {Split} from "@geoffcox/react-splitter";
+import {ASIDE_A0204010000} from "../../../components/Include/AsideMenus";
+import TreeView from 'devextreme-react/tree-view';
+import {getBOMGridData, getBOMRoutingGridData, getBOMTreeData} from "../../../common/hooks/requestApi";
+import {MDM_PRG_A0204010000_BOM_GRID} from "./MDM_PRG_A0204010000_BOM_GRID";
+import {MDM_PRG_A0204010000_BOM_ROUTING_GRID} from "./MDM_PRG_A0204010000_BOM_ROUTING_GRID";
 
 const MDM_PRG_A0204010000 = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
+  const treeViewRef = useRef(null);
+  // 첫번째 그리드 데이터
+  const [bomGridData, setBomGridData] = useState([]);
+  const [bomRoutingGridData, setBomRoutingGridData] = useState([]);
+  //초기 검색 하지 않기 위한 플래그
+  const [init, setInit] = useState(false);
+  //검색 조건
+  const [formData, setFormData] = useState({
+    StyleNo : '',
+    Size : '',
+    Part : '',
+    IncludeItem : 'PH',
+    UseYn : '',
+    ConfirmYn : '',
+    ParentItemCode :'',
+    parentId : '',
+  });
 
   const togglePopup = () => {
     setPopupVisibility(!isPopupVisible);
@@ -24,10 +45,83 @@ const MDM_PRG_A0204010000 = (props) => {
     setActive(!isActive);
   }
 
+  //탭메뉴
+  const tabActive = () => {
+
+    const tabItem = document.querySelectorAll('.grid-tab');
+
+    tabItem.forEach((tab, idx)=> {    
+      tab.addEventListener('click', function(){        
+          tabItem.forEach((item)=> {
+              item.classList.remove('active');
+          });
+  
+          tabItem[idx].classList.add('active');  
+      });      
+    });
+  }
+
+  //ASIDE 영역 변경시 반영 함수
+  const handleInputChange = (e) => {
+    const name = (e.component.NAME === 'dxRadioGroup') ? e.element.accessKey : (e.component.NAME === 'dxSelectBox') ? e.itemData.name : e.event.target.name;
+    const value = (e.component.NAME === 'dxRadioGroup') ? e.value : (e.component.NAME === 'dxSelectBox') ? e.itemData.value : e.event.target.value;
+
+    // setFormData(prevData => ({...prevData, [name]: value}));
+
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name] : value
+      }
+    })
+  }
+
+  //ASIDE 조회 버튼 클릭 시 실행 함수
+  const handleFetchButtonClick = () => {
+    setInit(true);
+    setBomGridData([]);
+    //초기 조회시 처리
+    getBOMTreeData({...formData, ParentItemCode : ''}, true).then(result => {
+      treeViewRef.current.instance.option('items', result);
+    });
+  }
+
+  // Tree 클릭 시 실행 이벤트
+  const handlerItemClick = (e) => {
+        // if(e.itemData.parentId === ''){
+    // const searchKey = e.itemData.parentId === '' ? e.itemData.id : e.itemData.ChildItemCode;
+    const searchKey = e.itemData.searchParentKey;
+
+    getBOMGridData(searchKey).then(result => {
+      setBomGridData(result);
+    }).catch(e => console.log(e));
+    // }
+  }
+
+  const handlerBomGridCellClick = (Company, Site, ItemCode) => {
+    getBOMRoutingGridData(Company, Site, ItemCode).then(result => {
+      setBomRoutingGridData(result);
+    }).catch(e => console.log(e));
+  }
+
+  //Tree 영역 펼칠 시 하위 조회 처리
+  const createChildren = (parent) => {
+    const parentId = parent ? parent.itemData.id : '';
+    const ParentItemCode = parent ? parent.itemData.searchParentKey :'';
+
+    return getBOMTreeData({ParentItemCode : ParentItemCode, parentId : parentId}, init).then().catch(e => console.log(e));
+  }
+
+  useEffect(() => {
+
+    tabActive();
+  }, []);
+
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
       <div className="aside-section">
-        <ASIDE_A0204010000 />
+        <ASIDE_A0204010000 handleInputChange={handleInputChange} handleFetchButtonClick={handleFetchButtonClick} />
+        {/*<ASIDE_A0204010000_Custom handleInputChange={handleInputChange} handleFetchButtonClick={handleFetchButtonClick} />*/}
       </div>
 
       <div className="contents-section">
@@ -59,49 +153,26 @@ const MDM_PRG_A0204010000 = (props) => {
           <div className="grid-container gird-flex">
 
             <div className="grid-tree">
-              <div style={{ height: "100%", width:"320px", borderRadius:"8px", background: "#ddd" }}>트리 영역</div>
+              <div style={{ height: "100%", width:"320px", borderRadius:"8px", background: "", border:'1px solid black' }}>
+                <TreeView
+                    id="simple-treeview"
+                    ref={treeViewRef}
+                    height={'900px'}
+                    dataStructure="plain"
+                    scrollDirection={''}
+                    noDataText={'<span style="width:100%; text-align: center; margin-top: 10px; position: absolute;">조회된 데이터가 없습니다.</span>'}
+                    rootValue=""
+                    expandNodesRecursive={false}
+                    createChildren={createChildren}
+                    onItemClick={handlerItemClick}
+                />
+              </div>
             </div>
 
+
             <div className="grid-wrap">
-              <div className="grid-section">
-
-                <div className="grid-area">
-
-                  <div style={{ height: "400px", background: "#ddd" }}>그리드 영역</div>
-
-                </div>
-
-                <div className="grid-bottom">
-                  <div className="grid-total">
-                    총 00개(현재페이지 0/전체페이지 000000)
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="grid-section">
-
-                <div className="grid-headline">
-
-                  <div className="result-info">
-                    <span className="tit-icon"></span>
-                    <span className="title">Routing</span>
-                  </div>
-
-                </div>
-
-                <div className="grid-area">
-
-                  <div style={{ height: "400px", background: "#ddd" }}>그리드 영역</div>
-
-                </div>
-
-                <div className="grid-bottom">
-                  <div className="grid-total">
-                    총 00개(현재페이지 0/전체페이지 000000)
-                  </div>
-                </div>
-              </div>
+              <MDM_PRG_A0204010000_BOM_GRID bomGridData={bomGridData} handlerBomGridCellClick={handlerBomGridCellClick} />
+              <MDM_PRG_A0204010000_BOM_ROUTING_GRID bomRoutingGridData={bomRoutingGridData} />
             </div>
 
           </div>
