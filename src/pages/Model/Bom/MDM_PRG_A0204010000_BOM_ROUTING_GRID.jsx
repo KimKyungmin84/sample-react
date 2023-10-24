@@ -6,6 +6,7 @@ const MDM_PRG_A0204010000_BOM_ROUTING_GRID = (props) => {
     const bomRoutingGridRef = useRef(null);
     const [gridView, setGridView] = useState(null);
     const [dataProvider, setDataProvider] = useState(null);
+    const [rowCount, setRowCount] = useState(0);
 
     useEffect(() => {
         const container = bomRoutingGridRef.current;
@@ -50,6 +51,7 @@ const MDM_PRG_A0204010000_BOM_ROUTING_GRID = (props) => {
                 dataProvider.clearRows();
             }
             dataProvider.setRows(props.bomRoutingGridData);
+            setRowCount(dataProvider.getRowCount());
         }
 
     },[props.bomRoutingGridData])
@@ -64,7 +66,8 @@ const MDM_PRG_A0204010000_BOM_ROUTING_GRID = (props) => {
                 </div>
                 <div className="grid-bottom">
                     <div className="grid-total">
-                        총 00개(현재페이지 0/전체페이지 000000)
+                        총 {rowCount}개
+                        {/*(현재페이지 0/전체페이지 000000)*/}
                     </div>
                 </div>
             </div>

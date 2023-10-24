@@ -5,7 +5,13 @@ import {ReactComponent as Favorite} from "../../../image/favorite.svg";
 import {Split} from "@geoffcox/react-splitter";
 import {ASIDE_A0204010000} from "../../../components/Include/AsideMenus";
 import TreeView from 'devextreme-react/tree-view';
-import {getBOMGridData, getBOMRoutingGridData, getBOMTreeData} from "../../../common/hooks/requestApi";
+import {
+  getBOMChildTreeData,
+  getBOMGridData,
+  getBOMRoutingGridData,
+  getBOMTreeData, useBOMGridData,
+  useBOMTopTreeData
+} from "../../../common/hooks/requestApi";
 import {MDM_PRG_A0204010000_BOM_GRID} from "./MDM_PRG_A0204010000_BOM_GRID";
 import {MDM_PRG_A0204010000_BOM_ROUTING_GRID} from "./MDM_PRG_A0204010000_BOM_ROUTING_GRID";
 
@@ -28,6 +34,8 @@ const MDM_PRG_A0204010000 = (props) => {
     ParentItemCode :'',
     parentId : '',
   });
+
+  const {refetch, remove, isSuccess} = useBOMTopTreeData(formData, init);
 
   const togglePopup = () => {
     setPopupVisibility(!isPopupVisible);
@@ -79,23 +87,27 @@ const MDM_PRG_A0204010000 = (props) => {
   //ASIDE 조회 버튼 클릭 시 실행 함수
   const handleFetchButtonClick = () => {
     setInit(true);
+    //조회시 초기화 처리
     setBomGridData([]);
-    //초기 조회시 처리
-    getBOMTreeData({...formData, ParentItemCode : ''}, true).then(result => {
-      treeViewRef.current.instance.option('items', result);
-    });
+
+    refetch().then(result => {
+      treeViewRef.current.instance.option('items', result.data);
+    }).catch(e => console.log(e));
+
+    // getBOMTreeData({...formData, ParentItemCode : ''}, true).then(result => {
+    //   treeViewRef.current.instance.option('items', result);
+    // });
   }
 
   // Tree 클릭 시 실행 이벤트
   const handlerItemClick = (e) => {
-        // if(e.itemData.parentId === ''){
-    // const searchKey = e.itemData.parentId === '' ? e.itemData.id : e.itemData.ChildItemCode;
+    //TODO : 특정 컬럼 클릭시 동작 처리는 여기서 수정 하자
     const searchKey = e.itemData.searchParentKey;
-
-    getBOMGridData(searchKey).then(result => {
-      setBomGridData(result);
-    }).catch(e => console.log(e));
-    // }
+    if(isSuccess){
+      getBOMGridData(searchKey).then(result => {
+        setBomGridData(result);
+      }).catch(e => console.log(e));
+    }
   }
 
   const handlerBomGridCellClick = (Company, Site, ItemCode) => {
@@ -108,13 +120,16 @@ const MDM_PRG_A0204010000 = (props) => {
   const createChildren = (parent) => {
     const parentId = parent ? parent.itemData.id : '';
     const ParentItemCode = parent ? parent.itemData.searchParentKey :'';
-
-    return getBOMTreeData({ParentItemCode : ParentItemCode, parentId : parentId}, init).then().catch(e => console.log(e));
+    //TODO : 해당 처리는 devExtreme 제공 하는 형식이 useQuery 와 맞지 않아 미사용.
+    return getBOMChildTreeData({ParentItemCode : ParentItemCode, parentId : parentId}, init).then().catch(e => console.log(e));
   }
 
   useEffect(() => {
-
     tabActive();
+
+    return () => {
+      remove();
+    }
   }, []);
 
   return (

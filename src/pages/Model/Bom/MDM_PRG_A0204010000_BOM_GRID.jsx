@@ -6,6 +6,7 @@ const MDM_PRG_A0204010000_BOM_GRID = (props) => {
     const bomGridRef = useRef(null);
     const [gridView, setGridView] = useState(null);
     const [dataProvider, setDataProvider] = useState(null);
+    const [rowCount, setRowCount] = useState(0);
 
     useEffect(() => {
         const container = bomGridRef.current;
@@ -31,9 +32,6 @@ const MDM_PRG_A0204010000_BOM_GRID = (props) => {
 
         //컬럼 크기 변경 여부 설정
         grid.setDisplayOptions({columnResizable: false});
-
-        // grid.setPaging(true, 10);
-
         grid.onCellClicked = function (grid) {
             //TODO : 라우팅 그리드 조회시 모코드에 대해서 확실히 파악 필요.
 
@@ -54,14 +52,13 @@ const MDM_PRG_A0204010000_BOM_GRID = (props) => {
 
     }, []);
 
-
-
     useEffect(() => {
         if(dataProvider){
             if(dataProvider.getRowCount() > 0 ){
                 dataProvider.clearRows();
             }
             dataProvider.setRows(props.bomGridData);
+            setRowCount(dataProvider.getRowCount());
         }
 
     },[props.bomGridData])
@@ -76,7 +73,8 @@ const MDM_PRG_A0204010000_BOM_GRID = (props) => {
                 </div>
                 <div className="grid-bottom">
                     <div className="grid-total">
-                        총 00개(현재페이지 0/전체페이지 000000)
+                        총 {rowCount}개
+                        {/*(현재페이지 0/전체페이지 000000)*/}
                     </div>
                 </div>
             </div>
