@@ -79,6 +79,7 @@ const MDM_PRG_A0204010000 = (props) => {
   //ASIDE 조회 버튼 클릭 시 실행 함수
   const handleFetchButtonClick = () => {
     setInit(true);
+    setBomGridData([]);
     //초기 조회시 처리
     getBOMTreeData({...formData, ParentItemCode : ''}, true).then(result => {
       treeViewRef.current.instance.option('items', result);
@@ -90,7 +91,6 @@ const MDM_PRG_A0204010000 = (props) => {
         // if(e.itemData.parentId === ''){
     // const searchKey = e.itemData.parentId === '' ? e.itemData.id : e.itemData.ChildItemCode;
     const searchKey = e.itemData.searchParentKey;
-    console.log(e.itemData);
 
     getBOMGridData(searchKey).then(result => {
       setBomGridData(result);
@@ -108,9 +108,7 @@ const MDM_PRG_A0204010000 = (props) => {
   const createChildren = (parent) => {
     const parentId = parent ? parent.itemData.id : '';
     const ParentItemCode = parent ? parent.itemData.searchParentKey :'';
-    const itemData = parent ? parent.itemData : '';
 
-    console.log('ITEM DATA : ', itemData);
     return getBOMTreeData({ParentItemCode : ParentItemCode, parentId : parentId}, init).then().catch(e => console.log(e));
   }
 

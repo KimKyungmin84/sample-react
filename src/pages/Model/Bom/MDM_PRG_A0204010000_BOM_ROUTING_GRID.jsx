@@ -21,6 +21,18 @@ const MDM_PRG_A0204010000_BOM_ROUTING_GRID = (props) => {
         setDataProvider(provider);
         setGridView(grid);
 
+        //에디터 수정 여부
+        grid.editOptions.editable = false;
+        //에디터 업데이트 여부
+        grid.editOptions.updatable = false;
+        //체크바 표기 여부
+        grid.setCheckBar({visible: false});
+        //수정 상태 표기 여부
+        grid.setStateBar({visible: false});
+
+        //컬럼 크기 변경 여부 설정
+        grid.setDisplayOptions({columnResizable: false});
+
         return () => {
             grid.commit(true);
             provider.clearRows();

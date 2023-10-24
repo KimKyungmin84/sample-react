@@ -15,7 +15,7 @@ export const fields = [
     },
     {
         fieldName: "OpSeq",
-        dataType: ValueType.TEXT,
+        dataType: ValueType.NUMBER,
     },
     {
         fieldName: "Oper",
@@ -50,62 +50,98 @@ export const columns = [
     {
         name: "Company",
         fieldName: "Company",
-        width: "100",
+        width: "80",
+        header: {
+            text: "법인",
+        },
     },
     {
         name: "Site",
         fieldName: "Site",
-        width: "100",
+        width: "80",
+        header: {
+            text: "회계법인",
+        },
     },
     {
         name: "ItemCode",
         fieldName: "ItemCode",
-        width: "100",
+        width: "150",
+        header: {
+            text: "모코드",
+        },
     },
     {
         name: "OpSeq",
         fieldName: "OpSeq",
-        width: "100",
+        width: "80",
+        header: {
+            text: "공정순서",
+        },
     },
     {
         name: "Oper",
         fieldName: "Oper",
         width: "100",
+        header: {
+            text: "공정",
+        },
     },
     {
         name: "StdOper",
         fieldName: "StdOper",
         width: "100",
+        header: {
+            text: "표준공정",
+        },
     },
     {
         name: "EffectivityDate",
         fieldName: "EffectivityDate",
-        width: "100",
+        width: "150",
+        header: {
+            text: "유효 시작일",
+        },
     },
     {
         name: "DisableDate",
         fieldName: "DisableDate",
-        width: "100",
-    },
-    {
-        name: "CreateDate",
-        fieldName: "CreateDate",
-        width: "100",
+        width: "150",
+        header: {
+            text: "무효 시작일",
+        },
     },
     {
         name: "CreateUserId",
         fieldName: "CreateUserId",
         width: "100",
+        header: {
+            text: "등록자",
+        },
     },
     {
-        name: "UpdateDate",
-        fieldName: "UpdateDate",
-        width: "100",
+        name: "CreateDate",
+        fieldName: "CreateDate",
+        width: "150",
+        header: {
+            text: "등록일",
+        },
     },
     {
         name: "UpdateUserId",
         fieldName: "UpdateUserId",
         width: "100",
+        header: {
+            text: "수정자",
+        },
+    },
+    {
+        name: "UpdateDate",
+        fieldName: "UpdateDate",
+        width: "150",
+        header: {
+            text: "수정일",
+        },
     },
 ];
 
