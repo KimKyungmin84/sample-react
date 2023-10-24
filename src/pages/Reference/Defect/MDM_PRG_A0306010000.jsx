@@ -175,6 +175,8 @@ const MDM_PRG_A0306010000 = (props) => {
       return true; // 이벤트 처리를 계속 진행
     };
 
+    grid.onEditSearch()
+
     grid.setCheckableExpression("(state = 'c') or (state = 'u') or (state = 'd')", true);
 
     return () => {
