@@ -1,6 +1,6 @@
 import { ValueType } from "realgrid";
 
-export const sizeFields = [
+export const fields = [
   // CheckBar에 대한 설정 추가
   {
     fieldName: "stdMeSize",
@@ -92,7 +92,7 @@ export const sizeFields = [
   },
 ];
 
-export const sizeColumns = [
+export const columns = [
   {
     name: "stdMeSize",
     fieldName: "stdMeSize",
@@ -205,7 +205,39 @@ export const sizeColumns = [
   },
 ];
 
-export const sizeOptions = {
+export const columnLayout = [
+  {
+    name: "",
+    direction: "horizontal",
+    items: [],
+    header: { text: "" },
+  },
+  {
+    name: "",
+    direction: "horizontal",
+    items: [],
+    header: { text: "" },
+  },
+  {
+    name: "",
+    direction: "horizontal",
+    items: [],
+    header: { text: "" },
+  },
+  {
+    name: "",
+    direction: "horizontal",
+    items: [],
+    header: { text: "" },
+  },
+  {
+    name: "",
+    direction: "horizontal",
+    items: [],
+    header: { text: "" },
+  },
+];
+export const options = {
   // checkBar: {
   //   visible: true,
   //   headText: "H",

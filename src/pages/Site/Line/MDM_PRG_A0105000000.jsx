@@ -1,62 +1,43 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Popup } from "devextreme-react";
+import React, {useEffect, useRef, useState} from "react";
+import {Button, Popup} from "devextreme-react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Favorite } from "../../../image/favorite.svg";
 import { Split } from "@geoffcox/react-splitter";
 import { ASIDE_A0105000000 } from "../../../components/Include/AsideMenus";
-import { GridView, LocalDataProvider } from "realgrid";
 import AxiosCustomInstance from "../../../common/api/AxiosCustomInstance"
 import useErrorHandling from "../../../common/hooks/useErrorHandling";
-import { fields, columns, options } from "./MDM_PRG_A0105000000_data";
-import { popUpFields, popUpColumns, popUpOptions } from "./MDM_PRG_A0105000000_popUpData";
+import { MDM_PRG_A0105000000_SAVE_GRID } from "./MDM_PRG_A0105000000_SAVE_GRID";
+import { MDM_PRG_A0105000000_CONFIRM_GRID } from "./MDM_PRG_A0105000000_CONFIRM_GRID";
+import {GridView, LocalDataProvider} from "realgrid";
+import {columns, fields, options} from "./MDM_PRG_A0105000000_DATA";
 
 const MDM_PRG_A0105000000 = (props) => {
-  const [dataProvider, setDataProvider] = useState(null);
-  const [savePopUpDataProvider, setSavePopUpDataProvider] = useState(null);
-  const [confirmPopUpDataProvider, setConfirmPopUpDataProvider] = useState(null);
   const [gridView, setGridView] = useState(null);
-  const [savePopUpGridView, setSavePopUpGridView] = useState(null);
-  const [confirmPopUpGridView, setConfirmPopUpGridView] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const lineListGridElement = useRef(null);
-  const savePopUpGridElement = useRef(null);
-  const confirmPopUpGridElement = useRef(null);
-  const [formData, setFormData] = useState({});
-  const [popUpData, setPopUpData] = useState({}); // popUpData 상태 추가
-  const { setError } = useErrorHandling(); // 커스텀 훅스 에러 사용
+  const [dataProvider, setDataProvider] = useState(null);
+  const gridElement = useRef(null);
   const [gridRowCnt, setGridRowCnt] = useState(0); //그리드카운트 표시용
-
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-    }));
-  }, []);
+  const [isFetching, setIsFetching] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [saveGridData, setSaveGridData] = useState({});
+  const [confirmGridData, setconfirmGridData] = useState({});
+  const { setError } = useErrorHandling(); // 커스텀 훅스 에러 사용
 
   const handleInputChange = (e) => {
-    let name;
-    let value;
+    const name = (e.component.NAME === 'dxRadioGroup') ? e.element.accessKey : (e.component.NAME === 'dxSelectBox') ? e.itemData.name : e.event.target.name;
+    const value = (e.component.NAME === 'dxRadioGroup') ? e.value : (e.component.NAME === 'dxSelectBox') ? e.itemData.value : e.event.target.value;
 
-    if (e.component.NAME === "dxRadioGroup") {
-      name = e.element.accessKey;
-      value = e.value;
-    }
-    else if (e.component.NAME === "dxSelectBox") {
-      name = e.itemData.name;
-      value = e.itemData.value;
-    }
-    else {
-      name = e.event.target.name;
-      value = e.event.target.value;
-    }
+    // setFormData(prevData => ({...prevData, [name]: value}));
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name] : value
+      }
+    })
+  }
 
   useEffect(() => {
-    const container = lineListGridElement.current;
+    const container = gridElement.current;
     const provider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
     const grid = new GridView(container);
 
@@ -223,8 +204,6 @@ const MDM_PRG_A0105000000 = (props) => {
   }, []);
 
   const handleFetchButtonClick = async () => {
-    gridView.cancel(); // Cancel any ongoing edit before fetching new data
-
     setIsFetching(true);
 
     console.log("inputParam:::", formData);
@@ -232,15 +211,17 @@ const MDM_PRG_A0105000000 = (props) => {
     try {
       const response = await AxiosCustomInstance({}).post("http://localhost:10000/line/lineList",formData);
       const data = response.data;
-      console.log("handleFetchButtonClick:::", data)
 
-      if (dataProvider) {
+      console.log("handleFetchButtonClick:::", data)
+      if(dataProvider) {
+        if(dataProvider.getRowCount() > 0 ){
+          dataProvider.clearRows();
+        }
         if (Array.isArray(data)) {
           dataProvider.setRows(data);
         } else {
-          dataProvider.setRows([data]); // 데이터를 배열로 감싸서 설정
+          dataProvider.setRows(data);
         }
-        setGridRowCnt(dataProvider.getRowCount()); //데이타 카운트 처리
       }
     }catch (error) {
       console.error("Error fetching data:", error);
@@ -248,14 +229,6 @@ const MDM_PRG_A0105000000 = (props) => {
     }finally {
       setIsFetching(false);
     }
-  };
-
-  const btnGridInsert = () => {
-    gridView.commit();
-    var dataRow = dataProvider.addRow({});
-
-    setGridRowCnt(dataProvider.getRowCount()); //데이타 카운트 처리
-    gridView.setCurrent({dataRow: dataRow}); //추가된 행으로 포커스 이동
   };
 
   const btnGridDelete = () => {
@@ -280,9 +253,17 @@ const MDM_PRG_A0105000000 = (props) => {
       currState = dataProvider.getRowState(currRow);
       gridView.onCurrentRowChanged(gridView,gridView.getCurrent().dataRow,gridView.getCurrent().dataRow);//데이타 삭제시 onCurrentRowChanged 이벤트를 인식하지 못하기 때문에 실행을 시켜야 한다는 군
       dataProvider.setValue(gridView.getCurrent().dataRow, "UseYn", "N"); //삭제여부 값 변경
-  }
+    }
     console.log("삭제후-- currRow:::" + currRow + "::: state ::: " + currState);
     console.log("삭제후-- 그리드 카운트 :::" + dataProvider.getRowCount());
+  };
+
+  const btnGridInsert = () => {
+    gridView.commit();
+    var dataRow = dataProvider.addRow({});
+
+    setGridRowCnt(dataProvider.getRowCount()); //데이타 카운트 처리
+    gridView.setCurrent({dataRow: dataRow}); //추가된 행으로 포커스 이동
   };
 
   const handleSaveButtonClick = async () => {
@@ -331,6 +312,7 @@ const MDM_PRG_A0105000000 = (props) => {
     console.log("handleSaveButtonClick", jRowsData);
 
     setIsFetching(true);
+
     try {
       let response = await AxiosCustomInstance({}).post("http://localhost:10000/line/saveProcess",jRowsData);
       let data = response.data;
@@ -423,7 +405,7 @@ const MDM_PRG_A0105000000 = (props) => {
 
   function isValidateItem(item) {
     const company = item.Company?.trim();
-    
+
     if (!company) {
       return false;
     }
@@ -438,6 +420,7 @@ const MDM_PRG_A0105000000 = (props) => {
     if (!gridView) return;
     gridView.commit();
 
+    console.log("2222222" + dataProvider)
     //선택된 row가 미존재시 0를 리턴한다.
     let checkedRowsIndex = gridView.getCheckedRows(true);
     if (checkedRowsIndex.length === 0){
@@ -502,44 +485,7 @@ const MDM_PRG_A0105000000 = (props) => {
     return retData;
   }
 
-  useEffect(() => {
-    let popUpProvider = null;
-    let popUpGrid = null;
-
-    const timer = setTimeout(() => {
-      const savePopUpContainer = savePopUpGridElement.current;
-
-      if (savePopUpContainer ) {
-        popUpProvider = new LocalDataProvider(true);
-        popUpGrid = new GridView(savePopUpContainer);
-
-        popUpGrid.setDataSource(popUpProvider);
-        popUpProvider.setFields(popUpFields);
-        popUpGrid.setColumns(popUpColumns);
-        popUpGrid.setOptions(popUpOptions);
-
-        setSavePopUpDataProvider(popUpProvider);
-        setSavePopUpGridView(popUpGrid);
-
-        popUpGrid.setCheckBar({visible: false});
-        popUpGrid.setStateBar({visible: false});
-        popUpGrid.setEditOptions({editable: false});
-      }
-    }, 20); // 20ms 후 실행
-
-    return () => {
-      clearTimeout(timer);
-      if (savePopUpGridElement.current ) {
-        popUpGrid.commit(true);
-        popUpProvider.clearRows();
-        popUpGrid.destroy();
-        popUpProvider.destroy();//
-      }
-    }
-  }, [savePopUpGridElement]);
-
   const [isPopupVisible, setPopupVisibility] = useState(false);
-
   const openSaveModal = () => {
     const newData = getPopUpData();
 
@@ -558,14 +504,12 @@ const MDM_PRG_A0105000000 = (props) => {
     setIsFetching(true);
 
     try {
-      if (savePopUpDataProvider) {
-        if (Array.isArray(newData)) {
-          savePopUpDataProvider.setRows(newData);
-        } else {
-          savePopUpDataProvider.setRows([newData]); // 데이터를 배열로 감싸서 설정
-        }
+      if (Array.isArray(newData)) {
+        setSaveGridData(newData);
+      } else {
+        setSaveGridData([newData]); // 데이터를 배열로 감싸서 설정
       }
-    }catch (error) {
+    } catch (error) {
       console.error("Error fetching data:", error);
       setError(error)
     }finally {
@@ -576,42 +520,6 @@ const MDM_PRG_A0105000000 = (props) => {
   function closeSaveModal() {
     setPopupVisibility(!isPopupVisible);
   };
-
-  useEffect(() => {
-    let popUpProvider = null;
-    let popUpGrid = null;
-
-    const timer = setTimeout(() => {
-      const confirmPopUpContainer = confirmPopUpGridElement.current;
-
-      if (confirmPopUpContainer ) {
-        popUpProvider = new LocalDataProvider(true);
-        popUpGrid = new GridView(confirmPopUpContainer);
-
-        popUpGrid.setDataSource(popUpProvider);
-        popUpProvider.setFields(popUpFields);
-        popUpGrid.setColumns(popUpColumns);
-        popUpGrid.setOptions(popUpOptions);
-
-        setConfirmPopUpDataProvider(popUpProvider);
-        setConfirmPopUpGridView(popUpGrid);
-
-        popUpGrid.setCheckBar({visible: false});
-        popUpGrid.setStateBar({visible: false});
-        popUpGrid.setEditOptions({editable: false});
-      }
-    }, 20); // 20ms 후 실행
-
-    return () => {
-      clearTimeout(timer);
-      if (confirmPopUpGridElement.current ) {
-        popUpGrid.commit(true);
-        popUpProvider.clearRows();
-        popUpGrid.destroy();
-        popUpProvider.destroy();//
-      }
-    }
-  }, [confirmPopUpGridElement]);
 
   const [isPopupVisible2, setPopupVisibility2] = useState(false);
 
@@ -632,14 +540,12 @@ const MDM_PRG_A0105000000 = (props) => {
     setIsFetching(true);
 
     try {
-      if (confirmPopUpDataProvider) {
-        if (Array.isArray(newData)) {
-          confirmPopUpDataProvider.setRows(newData);
-        } else {
-          confirmPopUpDataProvider.setRows([newData]); // 데이터를 배열로 감싸서 설정
-        }
+      if (Array.isArray(newData)) {
+        setconfirmGridData(newData);
+      } else {
+        setconfirmGridData([newData]); // 데이터를 배열로 감싸서 설정
       }
-    }catch (error) {
+    } catch (error) {
       console.error("Error fetching data:", error);
       setError(error)
     }finally {
@@ -690,7 +596,7 @@ const MDM_PRG_A0105000000 = (props) => {
               <div className="grid-area">
 
                 <div style={{ height: "500px", background: "#ddd" }} >
-                  <div ref={lineListGridElement} style={{ height: "100%", width: "100%" }} />
+                  <div ref={gridElement} style={{ height: "100%", width: "100%" }} />
                 </div>
 
               </div>
@@ -721,32 +627,15 @@ const MDM_PRG_A0105000000 = (props) => {
             dragEnabled={false}
             shadingColor="rgba(0, 0, 0, 0.5)"
           >
-            <div className="modal-header">
-              <h3 className="modal-tit">저장</h3>
-              <span className="modal-subtit">{props.title}</span>
-            </div>
-
-            <div className="modal-body">
-              <h5 className="mc-tit">
-                <span className="mct-icon"></span>저장목록(총 {popUpData.length}개)
-              </h5>
-
-              <div className="grid-box">
-                <div id="realgrid" ref={savePopUpGridElement} style={{ height: "100%", width: "100%" }} />
-              </div>
-
-              <p className="mc-ques">상기 항목을 저장 하시겠습니까?</p>
-            </div>
-
-            <div className="modal-footer">
-              <Button className="cancle-btn" onClick={closeSaveModal}>취소</Button>
-              <Button className="confirm-btn" onClick={handleSaveButtonClick}>확인</Button>
-            </div>
-
+            <MDM_PRG_A0105000000_SAVE_GRID
+              saveGridData={saveGridData}
+              closeSaveModal={closeSaveModal}
+              handleSaveButtonClick={handleSaveButtonClick}
+            />
           </Popup>
-          {/* 저장 모달 --// */}
+           저장 모달 --//
 
-          {/* //-- 확정 모달 */}
+           //-- 확정 모달
           <Popup
             visible={isPopupVisible2}
             hideOnOutsideClick={true}
@@ -755,29 +644,13 @@ const MDM_PRG_A0105000000 = (props) => {
             dragEnabled={false}
             shadingColor="rgba(0, 0, 0, 0.5)"
           >
-            <div className="modal-header">
-              <h3 className="modal-tit">확정</h3>
-              <span className="modal-subtit">{props.title}</span>
-            </div>
-
-            <div className="modal-body">
-              <h5 className="mc-tit">
-                <span className="mct-icon"></span>확정목록(총 4개)
-              </h5>
-
-              <div className="grid-box">
-                <div id="realgrid" ref={confirmPopUpGridElement} style={{ height: "100%", width: "100%" }} />
-              </div>
-
-              <p className="mc-ques">상기 항목을 확정 하시겠습니까?</p>
-            </div>
-
-            <div className="modal-footer">
-              <Button className="cancle-btn" onClick={closeConfirmModal}>취소</Button>
-              <Button className="confirm-btn" onClick={handleConfirmButtonClick}>확인</Button>
-            </div>
+            <MDM_PRG_A0105000000_CONFIRM_GRID
+              confirmGridData={confirmGridData}
+              closeConfirmModal={closeConfirmModal}
+              handleConfirmButtonClick={handleConfirmButtonClick}
+            />
           </Popup>
-          {/* 확정 모달 --// */}
+           확정 모달 --//
         </div>
       </div>
     </Split>

@@ -9,7 +9,6 @@ import {
 import { useState } from "react";
 
 export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) => {
-  const [formData, setFormData] = useState({});
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';
@@ -37,7 +36,6 @@ export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) =
             name="Company"
             url="http://localhost:10000/filter/filterCompany"
             handleInputChange={handleInputChange}
-            paramValue={formData.Company}
           ></SelectComponent>
         </div>
 
@@ -47,7 +45,6 @@ export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) =
             name="Factory"
             url="http://localhost:10000/filter/filterFactory"
             handleInputChange={handleInputChange}
-            paramValue={formData.Factory}
           ></SelectComponent>
         </div>
 
@@ -57,7 +54,6 @@ export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) =
             name="Plant"
             url="http://localhost:10000/filter/filterPlant"
             handleInputChange={handleInputChange}
-            paramValue={formData.Plant}
           ></SelectComponent>
         </div>
 
@@ -67,7 +63,6 @@ export const ASIDE_A0105000000 = ({handleInputChange, handleFetchButtonClick}) =
             name="Oper"
             url="http://localhost:10000/filter/filterOper"
             handleInputChange={handleInputChange}
-            paramValue={formData.Oper}
           ></SelectComponent>
         </div>
 

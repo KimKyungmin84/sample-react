@@ -29,8 +29,8 @@ export const ASIDE_A0302000000 = ({handleInputChange, handleFetchButtonClick}) =
       <div className="search-cate">
         <div className="sc-box">
           <RadioComponent
-            id="rad_useYn"
-            name="useYn"
+            id="rad_UseYn"
+            name="UseYn"
             type="USE_TYPE"
             handleInputChange={handleInputChange}
           ></RadioComponent>

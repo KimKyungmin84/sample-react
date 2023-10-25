@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Button } from "devextreme-react";
 import {GridView, LocalDataProvider} from "realgrid";
-import { fields, columns, options } from "./MDM_PRG_A0105000000_POPUP_DATA";
+import { fields, columns, options } from "./MDM_PRG_A0105000000_SAVE_DATA";
 
-const MDM_PRG_A0105000000_POPUP_GRID = (props) => {
+const MDM_PRG_A0105000000_SAVE_GRID = (props) => {
   const [dataProvider, setDataProvider] = useState(null);
   const [gridView, setGridView] = useState(null);
   const gridElement = useRef(null);
@@ -22,6 +22,10 @@ const MDM_PRG_A0105000000_POPUP_GRID = (props) => {
     setDataProvider(provider);
     setGridView(grid);
 
+    grid.setCheckBar({visible: false});
+    grid.setStateBar({visible: false});
+    grid.setEditOptions({editable: false});
+
     return () => {
       grid.commit(true);
       provider.clearRows();
@@ -35,14 +39,14 @@ const MDM_PRG_A0105000000_POPUP_GRID = (props) => {
       if(dataProvider.getRowCount() > 0 ){
         dataProvider.clearRows();
       }
-      if (Array.isArray(props.popUpGridData)) {
-        dataProvider.setRows(props.popUpGridData);
+      if (Array.isArray(props.saveGridData)) {
+        dataProvider.setRows(props.saveGridData);
       } else {
-        dataProvider.setRows([props.popUpGridData]); // 데이터를 배열로 감싸서 설정
+        dataProvider.setRows([props.saveGridData]); // 데이터를 배열로 감싸서 설정
       }
       setGridRowCnt(dataProvider.getRowCount());
     }
-  },[props.popUpGridData])
+  },[props.saveGridData])
 
   return (
     <>
@@ -70,4 +74,4 @@ const MDM_PRG_A0105000000_POPUP_GRID = (props) => {
     </>
   )
 }
-export {MDM_PRG_A0105000000_POPUP_GRID};
+export {MDM_PRG_A0105000000_SAVE_GRID};

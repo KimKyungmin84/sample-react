@@ -7,95 +7,56 @@ import { ASIDE_A0302000000 } from "../../../components/Include/AsideMenus";
 import AxiosCustomInstance from "../../../common/api/AxiosCustomInstance";
 import useErrorHandling from "../../../common/hooks/useErrorHandling";
 import {GridView, LocalDataProvider} from "realgrid";
-import { detailFields, detailColumns, detailOptions } from "./MDM_PRG_A0302000000_detailData";
-import { sizeFields, sizeColumns, sizeOptions } from "./MDM_PRG_A0302000000_sizeData";
-
+import {fields, columns, columnLayout, options } from "./MDM_PRG_A0302000000_SIZE_DATA";
+import { MDM_PRG_A0302000000_DETAIL_GRID } from "./MDM_PRG_A0302000000_DETAIL_GRID";
 const MDM_PRG_A0302000000 = (props) => {
   const [sizeDataProvider, setSizeDataProvider] = useState(null);
-  const [detailDataProvider, setDetailDataProvider] = useState(null);
   const [sizeGridView, setSizeGridView] = useState(null);
-  const [detailGridView, setDetailGridView] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const sizeGridElement = useRef(null);
-  const detailGridElement = useRef(null);
   const [sizeGridRowCnt, setSizeGridRowCnt] = useState(0); //그리드카운트 표시용
-  const [detailGridRowCnt, setDetailGridRowCnt] = useState(0); //그리드카운트 표시용
   const [formData, setFormData] = useState({});
+  const [detailGridData, setDetailGridData] = useState([]);
   const { setError } = useErrorHandling(); // 커스텀 훅스 에러 사용
 
-  // formData 초기 값 지정
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-    }));
-  }, []);
-
   const handleInputChange = (e) => {
-    let name;
-    let value;
+    const name = (e.component.NAME === 'dxRadioGroup') ? e.element.accessKey : (e.component.NAME === 'dxSelectBox') ? e.itemData.name : e.event.target.name;
+    const value = (e.component.NAME === 'dxRadioGroup') ? e.value : (e.component.NAME === 'dxSelectBox') ? e.itemData.value : e.event.target.value;
 
-    // Radio
-    if (e.component.NAME === "dxRadioGroup") {
-      name = e.element.accessKey;
-      value = e.value;
-    }
-    // SelectBox
-    else if (e.component.NAME === "dxSelectBox") {
-      name = e.itemData.name;
-      value = e.itemData.value;
-    }
-    // textBox
-    else {
-      name = e.event.target.name;
-      value = e.event.target.value;
-    }
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name] : value
+      }
+    })
+  }
 
   useEffect(() => {
     const sizeContainer = sizeGridElement.current;
     const sizeProvider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
     const sizeGrid = new GridView(sizeContainer);
 
-    const detailContainer = detailGridElement.current;
-    const detailProvider = new LocalDataProvider(false); // 서버에서 데이터를 수정하도록 변경
-    const detailGrid = new GridView(detailContainer);
-
     sizeGrid.setDataSource(sizeProvider);
-    sizeProvider.setFields(sizeFields);
-    sizeGrid.setColumns(sizeColumns);
-    sizeGrid.setOptions(sizeOptions);
-
-    detailGrid.setDataSource(detailProvider);
-    detailProvider.setFields(detailFields);
-    detailGrid.setColumns(detailColumns);
-    detailGrid.setOptions(detailOptions);
+    sizeProvider.setFields(fields);
+    sizeGrid.setColumns(columns);
+    sizeGrid.setColumnLayout(columnLayout);
+    sizeGrid.setOptions(options);
 
     setSizeDataProvider(sizeProvider);
     setSizeGridView(sizeGrid);
 
-    setDetailDataProvider(detailProvider);
-    setDetailGridView(detailGrid);
+    sizeGrid.onCellClicked = function (gridSel, oldSel, newSel, clickData) {
 
-    sizeGrid.onCurrentChanged = function (grid, oldRow, newRow){
-      detailGridView.cancel();
-      if(newRow < 0) return;
+      alert(gridSel.getValue);
+      //onCellClicked();
+    };
 
-    }
     return () => {
       sizeGrid.commit(true);
       sizeProvider.clearRows();
       sizeGrid.destroy();
       sizeProvider.destroy();
 
-      detailGrid.commit(true);
-      detailProvider.clearRows();
-      detailGrid.destroy();
-      detailProvider.destroy();
     };
   }, []);
 
@@ -104,7 +65,7 @@ const MDM_PRG_A0302000000 = (props) => {
 
     setIsFetching(true);
 
-    console.log("===========:::", JSON.stringify(formData));
+    console.log("inputParam:::", formData);
 
     try {
       const response = await AxiosCustomInstance({}).post("http://localhost:10000/size/sizeList",formData);
@@ -117,6 +78,29 @@ const MDM_PRG_A0302000000 = (props) => {
           sizeDataProvider.setRows([data]); // 데이터를 배열로 감싸서 설정
         }
         setSizeGridRowCnt(sizeDataProvider.getRowCount()); //데이타 카운트 처리
+      }
+    }catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error)
+    }finally {
+      setIsFetching(false);
+    }
+  };
+
+  const onCellClicked = async () => {
+    setIsFetching(true);
+
+    //console.log("===========:::", JSON.stringify(formData));
+    console.log("inputParam:::", formData);
+
+    try {
+      const response = await AxiosCustomInstance({}).post("http://localhost:10000/size/detailList",formData);
+      const data = response.data;
+
+      if (Array.isArray(data)){
+        setDetailGridData(data);
+      } else {
+        setDetailGridData([data]); // 데이터를 배열로 감싸서 설정
       }
     }catch (error) {
       console.error("Error fetching data:", error);
@@ -179,14 +163,14 @@ const MDM_PRG_A0302000000 = (props) => {
               <div className="grid-area">
 
                 <div style={{ height: "600px", background: "#ddd" }}>
-                  <div ref={sizeGridElement} style={{ height: "600px", width: "100%" }}></div>
+                  <div ref={sizeGridElement} style={{ height: "100%", width: "100%" }}></div>
                 </div>
 
               </div>
 
               <div className="grid-bottom">
                 <div className="grid-total">
-                  총 00개(현재페이지 0/전체페이지 000000)
+                  총 {sizeGridRowCnt}개(현재페이지 0/전체페이지 000000)
                 </div>
 
                 <div className="grid-buttons">
@@ -197,36 +181,7 @@ const MDM_PRG_A0302000000 = (props) => {
 
             </div>
 
-            <div className="grid-section">
-
-              <div className="grid-headline">
-
-                <div className="result-info">
-                  <span className="tit-icon"></span>
-                  <span className="title">Detail</span>
-                </div>
-
-              </div>
-
-              <div className="grid-area">
-
-                <div style={{ height: "600px", background: "#ddd" }}>
-                  <div ref={detailGridElement} style={{ height: "600px", width: "100%" }}></div>
-                </div>
-
-              </div>
-
-              <div className="grid-bottom">
-                <div className="grid-total">
-                  총 00개(현재페이지 0/전체페이지 000000)
-                </div>
-
-                <div className="grid-buttons">
-                  <Button className="normal-button">등록</Button>
-                  <Button className="normal-button">삭제</Button>
-                </div>
-              </div>
-            </div>
+            <MDM_PRG_A0302000000_DETAIL_GRID detailGridData={detailGridData}/>
 
           </div>
 

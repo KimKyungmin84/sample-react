@@ -43,8 +43,6 @@ const MDM_PRG_A0204010000_BOM_ROUTING_GRID = (props) => {
 
     }, []);
 
-
-
     useEffect(() => {
         if(dataProvider){
             if(dataProvider.getRowCount() > 0 ){
