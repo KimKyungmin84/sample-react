@@ -282,6 +282,7 @@ export const InputComponent = forwardRef((props, ref) => {
           onValueChanged={props.handleInputChange}
           defaultValue={props.defaultValue}
           ref={ref}
+          className="dx-field-value"
         />
       </div>
     </>
@@ -363,6 +364,7 @@ export const RadioComponent = forwardRef((props, ref) => {
           valueExpr="value"
           displayExpr="label"
           layout="horizontal"
+          className="radio-group"
           ref={ref}
           onValueChanged={props.handleInputChange}
         />
