@@ -194,6 +194,7 @@ export const columns  = [
     header: {
       text: "등록일",
     },
+    editable: false,
   },
   {
     name: "updateUser",

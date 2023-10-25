@@ -6,8 +6,8 @@ import {InputComponent, RadioComponent} from "../../../common/utils/commonFilter
 
 export const ASIDE_A0306020000 = ({handleInputChange, handleFetchButtonClick}) => {
 
-  const searchUse = ['All', 'Y', 'N']
-  const searchConfirm = ['All', 'P', 'Y', 'N']
+  // const searchUse = ['All', 'Y', 'N']
+  // const searchConfirm = ['All', 'P', 'Y', 'N']
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';

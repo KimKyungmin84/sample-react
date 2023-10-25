@@ -9,9 +9,7 @@ import { useState } from "react";
 
 export const ASIDE_A0306010000 = ({handleInputChange, handleFetchButtonClick}) => {
 
-  const [formData, setFormData] = useState({});
-  const searchUse = ['All', 'Y', 'N']
-  const searchConfirm = ['All', 'P', 'Y', 'N']
+  // const [formData, setFormData] = useState({});
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';

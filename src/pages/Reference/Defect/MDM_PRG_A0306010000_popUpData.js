@@ -1,7 +1,15 @@
 import { ValueType } from "realgrid";
 
-export const fields = [
+export const popUpFields = [
   // CheckBar에 대한 설정 추가
+  {
+    fieldName: "defect",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "defectName",
+    dataType: ValueType.TEXT,
+  },
   {
     fieldName: "defectGroup",
     dataType: ValueType.TEXT,
@@ -15,7 +23,15 @@ export const fields = [
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "remarks",
+    fieldName: "defectOper",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "remark",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "defectGroupSeq",
     dataType: ValueType.TEXT,
   },
   {
@@ -52,13 +68,36 @@ export const fields = [
   },
 ];
 
-export const columns = [
+export const popUpColumns  = [
+  {
+    name: "defect",
+    fieldName: "defect",
+    width: "150",
+    header: {
+      text: "불량코드",
+    },
+  },
+  {
+    name: "defectName",
+    fieldName: "defectName",
+    width: "150",
+    header: {
+      text: "불량코드명",
+    },
+  },
   {
     name: "defectGroup",
     fieldName: "defectGroup",
     width: "150",
     header: {
-      text: "불량그룹코드",
+      text: "불량그룹",
+    },
+    values: [],
+    labels: [],
+    editor: {
+      type: "list", // dropDown 구성
+      domainOnly: true,
+      textReadOnly: true
     },
   },
   {
@@ -68,6 +107,7 @@ export const columns = [
     header: {
       text: "불량그룹명",
     },
+    editable: false,
   },
   {
     name: "defectType",
@@ -79,11 +119,27 @@ export const columns = [
     editable: false,
   },
   {
+    name: "defectOper",
+    fieldName: "defectOper",
+    width: "150",
+    header: {
+      text: " 불량공정",
+    },
+  },
+  {
     name: "remark",
     fieldName: "remark",
     width: "150",
     header: {
       text: "비고",
+    },
+  },
+  {
+    name: "defectGroupSeq",
+    fieldName: "defectGroupSeq",
+    width: "150",
+    header: {
+      text: "순서",
     },
   },
   {
@@ -138,7 +194,6 @@ export const columns = [
     header: {
       text: "등록일",
     },
-    editable: false,
   },
   {
     name: "updateUser",
@@ -160,7 +215,7 @@ export const columns = [
   },
 ];
 
-export const options = {
+export const popUpOptions = {
   // checkBar: {
   //   visible: true,
   //   headText: "H",

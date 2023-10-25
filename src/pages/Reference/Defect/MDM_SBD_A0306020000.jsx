@@ -136,7 +136,7 @@ const MDM_PRG_A0306020000 = (props) => {
     try {
 
       console.log("===========:::", JSON.stringify(formData));
-      const response = await AxiosCustomInstance({}).post("http://localhost:10000/filter/defectInfomationList",formData);
+      const response = await AxiosCustomInstance({}).post("http://localhost:10000/defect/defectGroupInfomationList",formData);
       const data = response.data;
 
       if (dataProvider) {
@@ -247,7 +247,7 @@ const MDM_PRG_A0306020000 = (props) => {
 
               <div className="grid-bottom">
                 <div className="grid-total">
-                  총 00개(현재페이지 0/전체페이지 000000)
+                  총 {gridRowCnt}개(현재페이지 0/전체페이지 000000)
                 </div>
 
                 <div className="grid-buttons">
