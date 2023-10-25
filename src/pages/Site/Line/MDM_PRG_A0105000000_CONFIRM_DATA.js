@@ -1,6 +1,6 @@
 import { ValueType } from "realgrid";
 
-export const popUpFields = [
+export const fields = [
   // CheckBar에 대한 설정 추가
   {
     fieldName: "Company",
@@ -104,7 +104,7 @@ export const popUpFields = [
   },
 ];
 
-export const popUpColumns = [
+export const columns = [
   {
     name: "Company",
     fieldName: "Company",
@@ -227,7 +227,7 @@ export const popUpColumns = [
   },
 ];
 
-export const popUpOptions = {
+export const options = {
   // checkBar: {
   //   visible: true,
   //   headText: "H",
