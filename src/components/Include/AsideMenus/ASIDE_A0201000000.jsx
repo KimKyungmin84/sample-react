@@ -1,13 +1,9 @@
-import { SelectBox, RadioGroup, TextBox } from "devextreme-react";
+import {Button} from "devextreme-react";
 import "../../../assets/aside.css";
-import { ReactComponent as Close } from "../../../image/close.svg";
-import { Button } from "devextreme-react";
+import {ReactComponent as Close} from "../../../image/close.svg";
+import {InputComponent, RadioComponent, SelectComponent} from "../../../common/utils/commonFilter";
 
-export const ASIDE_A0201000000 = () => {
-
-  const searchSelect = ['All', 'EX']
-  const searchUse = ['All', 'Y', 'N']
-  const searchConfirm = ['All', 'P', 'Y', 'N']
+export const ASIDE_A0201000000 = ({handleInputChange, handleFetchButtonClick}) => {
 
   const closeAside = () => {
     document.querySelector('.split-container').style.cssText = '--react-split-min-primary: 20px; --react-split-min-secondary: calc(100% - 300px); --react-split-primary: 0px; --react-split-splitter: 5px';
@@ -31,68 +27,60 @@ export const ASIDE_A0201000000 = () => {
       <div className="search-cate">
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Category
-          </h5>
-
-          <div className="sc-cont">
-            <SelectBox
-              name=""
-              id=""
-              className="sc-select"
-              items={searchSelect}
-            />
-          </div>
+          <SelectComponent
+              id="cbo_Category"
+              name="Category"
+              url={'http://localhost:10000/filter/category'}
+              handleInputChange={handleInputChange}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            Sub Category
-          </h5>
-
-          <div className="sc-cont">
-            <SelectBox
-              name=""
-              id=""
-              className="sc-select"
-              items={searchSelect}
-            />
-          </div>
+          <SelectComponent
+              id="cbo_SubCategory"
+              name="SubCategory"
+              url={'http://localhost:10000/filter/subCategory'}
+              handleInputChange={handleInputChange}
+          ></SelectComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            모델명
-          </h5>
-
-          <div className="sc-cont">
-            <TextBox inputAttr="" className="dx-field-value" defaultValue="" />
-          </div>
+          <InputComponent
+              id="ModelId"
+              name="ModelId"
+              handleInputChange={handleInputChange}
+          ></InputComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            사용
-          </h5>
-
-          <div className="sc-cont">
-            <RadioGroup className="radio-group" items={searchUse} defaultValue={searchUse[0]} />
-          </div>
+          <InputComponent
+              id="ModelName"
+              name="ModelName"
+              handleInputChange={handleInputChange}
+          ></InputComponent>
         </div>
 
         <div className="sc-box">
-          <h5 className="sc-tit">
-            확정
-          </h5>
+          <RadioComponent
+              id="rad_UseYn"
+              name="UseYn"
+              type="USE_TYPE"
+              handleInputChange={handleInputChange}
+          ></RadioComponent>
+        </div>
 
-          <div className="sc-cont">
-            <RadioGroup className="radio-group" items={searchConfirm} defaultValue={searchConfirm[0]} />
-          </div>
+        <div className="sc-box">
+          <RadioComponent
+              id="rad_ConfirmYn"
+              name="ConfirmYn"
+              type="CONFIRM_TYPE"
+              handleInputChange={handleInputChange}
+          ></RadioComponent>
         </div>
 
       </div>
 
-      <Button type="button" className="search-button" text="조회" />
+      <Button type="button" className="search-button" text="조회" onClick={handleFetchButtonClick} />
 
     </div>
   )

@@ -4,7 +4,7 @@ import {columns, fields, options} from "./MDM_PRG_A0204010000_BOM_GRID_DATA";
 
 const MDM_PRG_A0204010000_BOM_GRID = (props) => {
     const bomGridRef = useRef(null);
-    const [gridView, setGridView] = useState(null);
+    const [, setGridView] = useState(null);
     const [dataProvider, setDataProvider] = useState(null);
     const [rowCount, setRowCount] = useState(0);
 

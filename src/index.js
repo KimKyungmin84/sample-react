@@ -14,7 +14,16 @@ import CatchedErrorBoundary from './common/components/error/components/CatchedEr
 import { RecoilRoot } from 'recoil';
 
 
-export const queryClient = new QueryClient();
+// export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            suspense: false,
+        },
+    },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root'), {devtool:false}

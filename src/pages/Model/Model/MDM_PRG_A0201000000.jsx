@@ -1,11 +1,33 @@
 import React, {useState} from "react";
-import { Button, Popup } from "devextreme-react";
-import { Link } from "react-router-dom";
-import { ReactComponent as Favorite } from "../../../image/favorite.svg";
-import { Split } from "@geoffcox/react-splitter";
-import { ASIDE_A0201000000 } from "../../../components/Include/AsideMenus";
+import {Button, Popup} from "devextreme-react";
+import {Link} from "react-router-dom";
+import {ReactComponent as Favorite} from "../../../image/favorite.svg";
+import {Split} from "@geoffcox/react-splitter";
+import {ASIDE_A0201000000} from "../../../components/Include/AsideMenus";
+import {MDM_PRG_A0201000000_MODEL_GRID} from "./MDM_PRG_A0201000000_MODEL_GRID";
+import {useModelDetailGridData, useModelGridData, useModelTrackingGridData} from "../../../common/hooks/useModelApi";
+import {MDM_PRG_A0201000000_TRACKING_GRID} from "./MDM_PRG_A0201000000_TRACKING_GRID";
+import {MDM_PRG_A0201000000_DETAIL_GRID} from "./MDM_PRG_A0201000000_DETAIL_GRID";
 
 const MDM_PRG_A0201000000 = (props) => {
+  const [modelGridData, setModelGridData] = useState([]);
+  const [trackingGridData, setTrackingGridData] = useState([]);
+  const [modelDetailGridData, setModelDetailGridData] = useState([]);
+
+
+  const [init, setInit] = useState(false);
+
+  const [formData, setFormData] = useState({
+    Category : '',
+    SubCategory : '',
+    ModelId : '',
+    ModelName : '',
+    UseYn : '',
+    ConfirmYn : '',
+  });
+
+  const {refetch} = useModelGridData(formData, init);
+  // const {refetch:trackingRefetch} = useModelTrackingGridData(parentModelId, formData.Category, formData.SubCategory, trackingInit);
 
   const minHeight = 200;
   const [masterDomHeight, setMasterDomHeight] = useState(270);
@@ -62,11 +84,45 @@ const MDM_PRG_A0201000000 = (props) => {
     setActive(!isActive);
   }
 
+  const handleInputChange = (e) => {
+    const name = (e.component.NAME === 'dxRadioGroup') ? e.element.accessKey : (e.component.NAME === 'dxSelectBox') ? e.itemData.name : e.event.target.name;
+    const value = (e.component.NAME === 'dxRadioGroup') ? e.value : (e.component.NAME === 'dxSelectBox') ? e.itemData.value : e.event.target.value;
+
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name] : value
+      }
+    })
+  }
+
+  const handleFetchButtonClick = () => {
+    setInit(true);
+
+    refetch().then(result => {
+      setModelGridData(result.data);
+    }).catch(e => console.log(e));
+  }
+
+  const  handlerModelGridCellClick = (ModelId) => {
+    // setParentModelId(ModelId);
+    setTrackingGridData([]);
+    useModelTrackingGridData(ModelId, '', '').then(result => {
+      setTrackingGridData(result);
+    }).catch(e => console.log(e));
+  };
+
+  const handlerModelTrackingGridCellClick = (ModelId) => {
+    setModelDetailGridData([]);
+    useModelDetailGridData(ModelId, '', '').then(result => {
+      setModelDetailGridData(result);
+    }).catch(e => console.log(e));
+  }
 
   return (
     <Split initialPrimarySize='300px' minPrimarySize='20px' minSecondarySize='calc(100% - 300px)' splitterSize='5px' vertical>
       <div className="aside-section">
-        <ASIDE_A0201000000 />
+        <ASIDE_A0201000000 handleInputChange={handleInputChange} handleFetchButtonClick={handleFetchButtonClick} />
       </div>
 
       <div className="contents-section">
@@ -93,22 +149,7 @@ const MDM_PRG_A0201000000 = (props) => {
           <div className="grid-container grid-split">
 
             <div className="grid-section grid-drag-height" style={{ height: `${masterDomHeight}px` }}>
-              <div className="grid-area">
-
-                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
-
-                <div className="grid-bottom">
-                  <div className="grid-total">
-                    총 00개(현재페이지 0/전체페이지 000000)
-                  </div>
-
-                  <div className="grid-buttons">
-                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                  </div>
-                </div>
-
-              </div>
+              <MDM_PRG_A0201000000_MODEL_GRID togglePopup={togglePopup} togglePopup2={togglePopup2} modelGridData={modelGridData} handlerModelGridCellClick={handlerModelGridCellClick} />
 
               <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divA")}></div>
             </div>
@@ -122,22 +163,7 @@ const MDM_PRG_A0201000000 = (props) => {
                 </div>
               </div>
 
-              <div className="grid-area">
-
-                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
-
-                <div className="grid-bottom">
-                  <div className="grid-total">
-                    총 00개(현재페이지 0/전체페이지 000000)
-                  </div>
-
-                  <div className="grid-buttons">
-                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                  </div>
-                </div>
-
-              </div>
+              <MDM_PRG_A0201000000_TRACKING_GRID togglePopup={togglePopup} togglePopup2={togglePopup2} trackingGridData={trackingGridData} handlerModelTrackingGridCellClick={handlerModelTrackingGridCellClick} />
 
               <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divB")}></div>
             </div>
@@ -152,22 +178,23 @@ const MDM_PRG_A0201000000 = (props) => {
                 </div>
               </div>
 
-              <div className="grid-area">
+              <MDM_PRG_A0201000000_DETAIL_GRID togglePopup={togglePopup} togglePopup2={togglePopup2} modelDetailGridData={modelDetailGridData} />
+              {/*<div className="grid-area">*/}
 
-                <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>
+              {/*  <div className="grid-inner" style={{ background: "#ddd" }}>그리드 영역</div>*/}
 
-                <div className="grid-bottom">
-                  <div className="grid-total">
-                    총 00개(현재페이지 0/전체페이지 000000)
-                  </div>
+              {/*  <div className="grid-bottom">*/}
+              {/*    <div className="grid-total">*/}
+              {/*      총 00개(현재페이지 0/전체페이지 000000)*/}
+              {/*    </div>*/}
 
-                  <div className="grid-buttons">
-                    <Button className="normal-button" onClick={togglePopup}>저장</Button>
-                    <Button className="confirm-button" onClick={togglePopup2}>확정</Button>
-                  </div>
-                </div>
+              {/*    <div className="grid-buttons">*/}
+              {/*      <Button className="normal-button" onClick={togglePopup}>저장</Button>*/}
+              {/*      <Button className="confirm-button" onClick={togglePopup2}>확정</Button>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
 
-              </div>
+              {/*</div>*/}
 
               <div className="drag-handle" onMouseDown={(e) => handleMouseDown(e,"divC")}></div>
             </div>
