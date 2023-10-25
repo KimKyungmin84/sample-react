@@ -3,209 +3,206 @@ import { ValueType } from "realgrid";
 export const sizeFields = [
   // CheckBar에 대한 설정 추가
   {
-    fieldName: "comCode",
+    fieldName: "stdMeSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "comKrNm",
+    fieldName: "stdWoSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "comEnNm",
+    fieldName: "stdGsSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "region",
+    fieldName: "stdPsSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "erpYn",
+    fieldName: "stdTdSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "sort",
+    fieldName: "moldMeSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "useYn",
+    fieldName: "moldWoSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "confirmYn",
+    fieldName: "moldGsSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "confirmUser",
+    fieldName: "moldPsSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "confirmDate",
+    fieldName: "moldTdSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "regUser",
+    fieldName: "usMeSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "regDate",
+    fieldName: "usWoSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "updateUser",
+    fieldName: "usYouthsSize",
     dataType: ValueType.TEXT,
   },
   {
-    fieldName: "updateDate",
+    fieldName: "usTdSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "ukMeSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "ukWoSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "ukYouthsSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "ukInfantsSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "euMeSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "euWoSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "euYouthsSize",
+    dataType: ValueType.TEXT,
+  },
+  {
+    fieldName: "euInfantsSize",
     dataType: ValueType.TEXT,
   },
 ];
 
 export const sizeColumns = [
   {
-    name: "comCode",
-    fieldName: "comCode",
-    width: "150",
-    header: {
-      text: "법인코드",
-    },
+    name: "stdMeSize",
+    fieldName: "stdMeSize",
+    width: "70",
   },
   {
-    name: "comKrNm",
-    fieldName: "comKrNm",
-    width: "150",
-    header: {
-      text: "법인명(kr)",
-    },
+    name: "stdWoSize",
+    fieldName: "stdWoSize",
+    width: "70",
   },
   {
-    name: "comEnNm",
-    fieldName: "comEnNm",
-    width: "150",
-    header: {
-      text: "법인명(en)",
-    },
+    name: "stdGsSize",
+    fieldName: "stdGsSize",
+    width: "70",
   },
   {
-    name: "region",
-    fieldName: "region",
-    width: "150",
-    header: {
-      text: "지역",
-    },
-    values: [],
-    labels: [],
-    editor: {
-      type: "list", // dropDown 구성
-      domainOnly: true,
-      textReadOnly: true
-    },
+    name: "stdPsSize",
+    fieldName: "stdPsSize",
+    width: "70",
   },
   {
-    name: "erpYn",
-    fieldName: "erpYn",
-    width: "150",
-    header: {
-      text: "erp여부",
-    },
-    values: ["", "Y", "N"],
-    labels: ["선택", "Y", "N"],
-    editor: {
-      type: "list", // dropDown 구성
-      domainOnly: true,
-      textReadOnly: true
-    },
+    name: "stdTdSize",
+    fieldName: "stdTdSize",
+    width: "70",
   },
   {
-    name: "sort",
-    fieldName: "sort",
-    width: "150",
-    header: {
-      text: "sort",
-    },
+    name: "moldMeSize",
+    fieldName: "moldMeSize",
+    width: "70",
   },
   {
-    name: "useYn",
-    fieldName: "useYn",
-    width: "150",
-    header: {
-      text: "사용여부",
-    },
-    style: {
-      "background": "#edeef0", color:"#edeef0"
-    },
-    values: ["", "Y", "N"],
-    labels: ["선택", "Y", "N"],
-    editor: {
-      type: "list", // dropDown 구성
-      domainOnly: true,
-      textReadOnly: true
-    },
+    name: "moldWoSize",
+    fieldName: "moldWoSize",
+    width: "70",
   },
   {
-    name: "confirmYn",
-    fieldName: "confirmYn",
-    width: "150",
-    header: {
-      text: "확정여부",
-    },
-    editable: false,
-    // values: ["", "Y", "N"],
-    // labels: ["선택", "Y", "N"],
-    // editor: {
-    //   type: "list", // dropDown 구성
-    //   domainOnly: true,
-    //   textReadOnly: true
-    // },
+    name: "moldGsSize",
+    fieldName: "moldGsSize",
+    width: "70",
   },
   {
-    name: "confirmUser",
-    fieldName: "confirmUser",
-    width: "150",
-    header: {
-      text: "확정자",
-    },
+    name: "moldPsSize",
+    fieldName: "moldPsSize",
+    width: "70",
   },
   {
-    name: "confirmDate",
-    fieldName: "confirmDate",
-    width: "150",
-    header: {
-      text: "확정일",
-    },
+    name: "moldTdSize",
+    fieldName: "moldTdSize",
+    width: "70",
   },
   {
-    name: "regUser",
-    fieldName: "regUser",
-    width: "150",
-    header: {
-      text: "등록자",
-    },
+    name: "usMeSize",
+    fieldName: "usMeSize",
+    width: "70",
   },
   {
-    name: "regDate",
-    fieldName: "regDate",
-    width: "150",
-    header: {
-      text: "등록일",
-    },
+    name: "usWoSize",
+    fieldName: "usWoSize",
+    width: "70",
   },
   {
-    name: "updateUser",
-    fieldName: "updateUser",
-    width: "150",
-    header: {
-      text: "수정자",
-    },
+    name: "usYouthsSize",
+    fieldName: "usYouthsSize",
+    width: "70",
   },
   {
-    name: "updateDate",
-    fieldName: "updateDate",
-    width: "150",
-    header: {
-      text: "수정일",
-    },
+    name: "usTdSize",
+    fieldName: "usTdSize",
+    width: "70",
   },
-
+  {
+    name: "ukMeSize",
+    fieldName: "ukMeSize",
+    width: "70",
+  },
+  {
+    name: "ukWoSize",
+    fieldName: "ukWoSize",
+    width: "70",
+  },
+  {
+    name: "ukYouthsSize",
+    fieldName: "ukYouthsSize",
+    width: "70",
+  },
+  {
+    name: "ukInfantsSize",
+    fieldName: "ukInfantsSize",
+    width: "70",
+  },
+  {
+    name: "euMeSize",
+    fieldName: "euMeSize",
+    width: "70",
+  },
+  {
+    name: "euWoSize",
+    fieldName: "euWoSize",
+    width: "70",
+  },
+  {
+    name: "euYouthsSize",
+    fieldName: "euYouthsSize",
+    width: "70",
+  },
+  {
+    name: "euInfantsSize",
+    fieldName: "euInfantsSize",
+    width: "70",
+  },
 ];
 
 export const sizeOptions = {

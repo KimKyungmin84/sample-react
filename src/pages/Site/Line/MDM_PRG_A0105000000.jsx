@@ -732,7 +732,7 @@ const MDM_PRG_A0105000000 = (props) => {
               </h5>
 
               <div className="grid-box">
-                <div id="realgrid" ref={savePopUpGridElement} style={{ height: "90%", width: "100%" }} />
+                <div id="realgrid" ref={savePopUpGridElement} style={{ height: "100%", width: "100%" }} />
               </div>
 
               <p className="mc-ques">상기 항목을 저장 하시겠습니까?</p>
@@ -766,7 +766,7 @@ const MDM_PRG_A0105000000 = (props) => {
               </h5>
 
               <div className="grid-box">
-                <div id="realgrid" ref={confirmPopUpGridElement} style={{ height: "90%", width: "100%" }} />
+                <div id="realgrid" ref={confirmPopUpGridElement} style={{ height: "100%", width: "100%" }} />
               </div>
 
               <p className="mc-ques">상기 항목을 확정 하시겠습니까?</p>
