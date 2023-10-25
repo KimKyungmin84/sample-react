@@ -96,7 +96,7 @@ export const columns = [
         fieldName: "SizeUpDownType",
         width: "100",
         header: {
-            text: "SizeUpDownType",
+            text: "UP_DOWN_유형",
         },
     },
     {
